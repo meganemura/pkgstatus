@@ -1,4 +1,4 @@
-class Metrics::Repository::StarMetric < ::Metric
+class Metrics::Repository::StarMetric < Repocheck::Metric
   def self.name
     'GitHub Stars'
   end

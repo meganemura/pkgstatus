@@ -1,4 +1,4 @@
-class Metrics::Repository::LastCommitMetric < ::Metric
+class Metrics::Repository::LastCommitMetric < Repocheck::Metric
   def self.name
     'Last commit'
   end

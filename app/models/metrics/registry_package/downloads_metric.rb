@@ -1,4 +1,4 @@
-class Metrics::RegistryPackage::DownloadsMetric < ::Metric
+class Metrics::RegistryPackage::DownloadsMetric < Repocheck::Metric
   def self.name
     'Downloads'
   end
