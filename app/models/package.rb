@@ -14,7 +14,7 @@ class Package
   end
 
   def registry_metrics
-    []
+    registry_package.metrics
   end
 
   def repository_metrics
@@ -22,6 +22,12 @@ class Package
   end
 
   private
+
+  def registry_package
+    # XXX: Where to separate registries
+    # TODO: Detect registry_package class
+    Repocheck::RegistryPackages::RubygemsPackage.new(name)
+  end
 
   def repository
     Repository.from_url(resolver.resolve)
