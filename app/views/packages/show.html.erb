@@ -1,0 +1,9 @@
+<%= @package.metrics.inspect %>
+<br/>
+<ul>
+<%- @package.metrics.each do |metric| %>
+  <li>
+    <%= metric.name %>: <%= metric.value %>
+  </li>
+<%- end %>
+</ul>
