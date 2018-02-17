@@ -18,13 +18,13 @@ class Package
   end
 
   def repository_metrics
-    []
+    repository.metrics
   end
 
   private
 
   def repository
-    Repository.new(resolver.resolve)
+    Repository.from_url(resolver.resolve)
   end
 
   def resolver
