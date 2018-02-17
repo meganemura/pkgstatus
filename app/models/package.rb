@@ -20,4 +20,14 @@ class Package
   def repository_metrics
     []
   end
+
+  private
+
+  def repository
+    Repository.new(resolver.resolve)
+  end
+
+  def resolver
+    Resolver.new(registry)
+  end
 end
