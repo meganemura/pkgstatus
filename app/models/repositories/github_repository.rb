@@ -2,6 +2,7 @@ class Repositories::GithubRepository < ::Repository
   def self.metric_classes
     [
       Metrics::Repository::StarMetric,
+      Metrics::Repository::LastCommitMetric,
     ]
   end
 
@@ -18,6 +19,14 @@ class Repositories::GithubRepository < ::Repository
                     rescue Octokit::NotFound
                       nil
                     end
+  end
+
+  def last_commit
+    @last_commit ||= begin
+                       client.commits(slug, per_page: 1).first.to_hash
+                     rescue Octokit::NotFound
+                       nil
+                     end
   end
 
   private
