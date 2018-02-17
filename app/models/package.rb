@@ -8,4 +8,16 @@ class Package
       pkg.name = name
     end
   end
+
+  def metrics
+    registry_metrics + repository_metrics
+  end
+
+  def registry_metrics
+    []
+  end
+
+  def repository_metrics
+    []
+  end
 end
