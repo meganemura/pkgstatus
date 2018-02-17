@@ -1,5 +1,5 @@
-module Repocheck
-  class Metrics::RegistryPackage::DownloadsMetric < Repocheck::Metric
+module RepoClinic
+  class Metrics::RegistryPackage::DownloadsMetric < RepoClinic::Metric
     def self.name
       'Downloads'
     end

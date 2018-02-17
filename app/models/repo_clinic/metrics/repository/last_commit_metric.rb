@@ -1,5 +1,5 @@
-module Repocheck
-  class Metrics::Repository::LastCommitMetric < Repocheck::Metric
+module RepoClinic
+  class Metrics::Repository::LastCommitMetric < RepoClinic::Metric
     def self.name
       'Last commit'
     end

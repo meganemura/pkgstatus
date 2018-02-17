@@ -1,4 +1,4 @@
-module Repocheck
+module RepoClinic
   class Metric
     def initialize(source)
       @source = source

@@ -26,11 +26,11 @@ class Package
   def registry_package
     # XXX: Where to separate registries
     # TODO: Detect registry_package class
-    Repocheck::RegistryPackages::RubygemsPackage.new(name)
+    RepoClinic::RegistryPackages::RubygemsPackage.new(name)
   end
 
   def repository
-    Repocheck::Repository.from_package(registry, name)
+    RepoClinic::Repository.from_package(registry, name)
   end
 
   def cache_key

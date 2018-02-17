@@ -1,4 +1,4 @@
-module Repocheck
+module RepoClinic
   module RegistryPackages
     class RubygemsPackage
       def initialize(name)
