@@ -34,7 +34,7 @@ class Package
   end
 
   def resolver
-    Resolver.new(registry)
+    Resolver.new(registry, name)
   end
 
   def cache_key
