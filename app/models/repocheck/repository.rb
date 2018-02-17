@@ -1,3 +1,4 @@
+module Repocheck
 class Repository
   # FIXME: Detect repository service from uri
   def self.from_url(uri)
@@ -17,4 +18,5 @@ class Repository
   def metrics
     self.class.metric_classes.map { |klass| klass.new(self) }
   end
+end
 end

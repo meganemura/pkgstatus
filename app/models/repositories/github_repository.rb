@@ -1,4 +1,4 @@
-class Repositories::GithubRepository < ::Repository
+class Repositories::GithubRepository < Repocheck::Repository
   def self.metric_classes
     [
       Metrics::Repository::StarMetric,

@@ -30,7 +30,7 @@ class Package
   end
 
   def repository
-    Repository.from_url(resolver.resolve)
+    Repocheck::Repository.from_url(resolver.resolve)
   end
 
   def resolver
