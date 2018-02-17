@@ -1,5 +1,5 @@
-module Repocheck
-  class Metrics::Repository::StarMetric < Repocheck::Metric
+module RepoClinic
+  class Metrics::Repository::StarMetric < RepoClinic::Metric
     def self.name
       'GitHub Stars'
     end

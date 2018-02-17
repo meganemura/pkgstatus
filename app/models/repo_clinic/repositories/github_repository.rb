@@ -1,9 +1,9 @@
-module Repocheck
-  class Repositories::GithubRepository < Repocheck::Repository
+module RepoClinic
+  class Repositories::GithubRepository < RepoClinic::Repository
     def self.metric_classes
       [
-        Repocheck::Metrics::Repository::StarMetric,
-        Repocheck::Metrics::Repository::LastCommitMetric,
+        RepoClinic::Metrics::Repository::StarMetric,
+        RepoClinic::Metrics::Repository::LastCommitMetric,
       ]
     end
 
