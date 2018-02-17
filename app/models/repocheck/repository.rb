@@ -1,7 +1,8 @@
 module Repocheck
   class Repository
     # FIXME: Detect repository service from uri
-    def self.from_url(uri)
+    def self.from_package(registry, name)
+      uri = Resolver.new(registry, name).resolve
       Repositories::GithubRepository.new(uri)
     end
 

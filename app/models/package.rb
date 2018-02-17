@@ -30,11 +30,7 @@ class Package
   end
 
   def repository
-    Repocheck::Repository.from_url(resolver.resolve)
-  end
-
-  def resolver
-    Resolver.new(registry, name)
+    Repocheck::Repository.from_package(registry, name)
   end
 
   def cache_key
