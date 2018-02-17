@@ -37,7 +37,7 @@ module Repocheck
     end
 
     def access_token
-      ENV['PKGSTATUS_GITHUB_TOKEN']
+      ENV['REPOCHECK_GITHUB_TOKEN']
     end
   end
 end
