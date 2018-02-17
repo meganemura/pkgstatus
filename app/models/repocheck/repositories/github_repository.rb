@@ -1,3 +1,4 @@
+module Repocheck
 class Repositories::GithubRepository < Repocheck::Repository
   def self.metric_classes
     [
@@ -38,4 +39,5 @@ class Repositories::GithubRepository < Repocheck::Repository
   def access_token
     ENV['PKGSTATUS_GITHUB_TOKEN']
   end
+end
 end
