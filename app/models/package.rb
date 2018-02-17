@@ -30,4 +30,8 @@ class Package
   def resolver
     Resolver.new(registry)
   end
+
+  def cache_key
+    [self.class.name, registry, name].join(':')
+  end
 end

@@ -1,6 +1,5 @@
 <%= @package.metrics.inspect %>
 <br/>
 <%- @package.metrics.each do |metric| %>
-  <%= metric.name %>
-  <%= metric.value %>
+  <%= metric.name %>: <%= metric.value %>
 <%- end %>

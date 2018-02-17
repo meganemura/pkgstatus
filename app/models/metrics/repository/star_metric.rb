@@ -4,6 +4,6 @@ class Metrics::Repository::StarMetric < ::Metric
   end
 
   def value
-    source
+    source.repository[:stargazers_count]
   end
 end
