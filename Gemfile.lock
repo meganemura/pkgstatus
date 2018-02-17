@@ -64,6 +64,7 @@ GEM
     chromedriver-helper (1.2.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    coderay (1.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     erubi (1.7.0)
@@ -104,6 +105,12 @@ GEM
     octokit (4.8.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     pg (1.0.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
     public_suffix (3.0.1)
     puma (3.11.2)
     rack (2.0.4)
@@ -203,13 +210,13 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
-  byebug
   capybara (~> 2.15)
   chromedriver-helper
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   octokit
   pg (>= 0.18, < 2.0)
+  pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.0.rc1)
   redis-rails
