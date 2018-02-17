@@ -14,6 +14,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'octokit' # Repositories::GithubRepository
+gem 'gems'    # Repocheck::RegistryPackages::RubygemsPackage
 
 group :development, :test do
   gem 'pry-byebug'
