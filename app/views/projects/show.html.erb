@@ -1,0 +1,16 @@
+<%= @project.inspect %>
+<br/>
+<ul>
+<%- @project.packages.each do |package| -%>
+  <li>
+    <%= package.name %>
+    <ul>
+      <%- package.metrics.each do |metric| -%>
+        <li>
+          <%= metric.name %>: <%= metric.value %>
+        </li>
+      <%- end -%>
+    </ul>
+  </li>
+<%- end -%>
+</ul>

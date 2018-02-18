@@ -7,12 +7,6 @@ module RepoClinic
       ]
     end
 
-    # FIXME:
-    #   uri -> owner/repo slug
-    def slug
-      'meganemura/codestatus'
-    end
-
     def repository
       @repository ||= begin
                         # Sawyer::Resource -> Hash
