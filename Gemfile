@@ -13,8 +13,10 @@ gem 'redis-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
+# These will be removed
 gem 'octokit' # Repositories::GithubRepository
 gem 'gems'    # Repocheck::RegistryPackages::RubygemsPackage
+gem 'codestatus' # RepoClinic::Repository
 
 group :development, :test do
   gem 'pry-byebug'
