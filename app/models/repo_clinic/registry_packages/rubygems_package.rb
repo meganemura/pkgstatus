@@ -14,7 +14,7 @@ module RepoClinic
       end
 
       def metrics
-        self.class.metric_classes.map { |klass| klass.new(self) }
+        self.class.metric_classes.map { |klass| klass.new.preload(self) }
       end
 
       def gem_info
