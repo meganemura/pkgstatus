@@ -1,10 +1,11 @@
 module RepoClinic
   class Metric
-    def initialize(source)
-      @source = source
-    end
+    attr_reader :value
 
-    attr_reader :source
+    def preload(source)
+      @value = read(source)
+      self
+    end
 
     def self.name
     end

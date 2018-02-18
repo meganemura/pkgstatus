@@ -4,7 +4,7 @@ module RepoClinic
       'GitHub Stars'
     end
 
-    def value
+    def read(source)
       source.repository[:stargazers_count]
     end
   end
