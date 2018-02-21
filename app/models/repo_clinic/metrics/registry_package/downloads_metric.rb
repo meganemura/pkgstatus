@@ -1,6 +1,6 @@
 module RepoClinic
   class Metrics::RegistryPackage::DownloadsMetric < RepoClinic::Metric
-    def self.name
+    def self.title
       'Downloads'
     end
 

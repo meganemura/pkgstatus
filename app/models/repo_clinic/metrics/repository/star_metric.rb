@@ -1,6 +1,6 @@
 module RepoClinic
   class Metrics::Repository::StarMetric < RepoClinic::Metric
-    def self.name
+    def self.title
       'GitHub Stars'
     end
 
