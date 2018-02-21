@@ -12,6 +12,7 @@ gem 'puma', '~> 3.11'
 gem 'redis-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'rest-client'
 
 # These will be removed
 gem 'octokit'    # RepoClinic::Repositories::GithubRepository
