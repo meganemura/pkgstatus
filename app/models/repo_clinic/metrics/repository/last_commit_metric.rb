@@ -1,6 +1,6 @@
 module RepoClinic
   class Metrics::Repository::LastCommitMetric < RepoClinic::Metric
-    def self.name
+    def self.title
       'Last commit'
     end
 

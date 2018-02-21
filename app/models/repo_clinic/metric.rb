@@ -7,11 +7,11 @@ module RepoClinic
       self
     end
 
-    def self.name
+    def self.title
     end
 
-    def name
-      self.class.name
+    def title
+      self.class.title
     end
   end
 end
