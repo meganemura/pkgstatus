@@ -32,7 +32,7 @@ class Package
             when 'rubygems'
               RepoClinic::RegistryPackages::RubygemsPackage
             when 'npm'
-              RepoClinic::RegistryPackages::RubygemsPackage
+              RepoClinic::RegistryPackages::NpmPackage
             else
               nil
             end
