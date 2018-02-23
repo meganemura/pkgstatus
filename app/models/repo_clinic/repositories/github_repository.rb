@@ -27,6 +27,8 @@ module RepoClinic
 
     def status
       client.combined_status(slug, default_branch)&.state
+    rescue Octokit::NotFound
+      nil
     end
 
     private
