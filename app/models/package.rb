@@ -13,8 +13,7 @@ class Package
     cached = Rails.cache.read(cache_key)
     return cached if cached
 
-    # TODO: queueing
-    cache_metrics
+    FetchMetricsWorker.perform_async(registry, name)
 
     []
   end
