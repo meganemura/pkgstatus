@@ -26,6 +26,10 @@ module RepoClinic
                     nil
                   end
       end
+
+      def downloads
+        gem_info['downloads']
+      end
     end
   end
 end
