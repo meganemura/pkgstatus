@@ -4,6 +4,7 @@ module RepoClinic
       [
         RepoClinic::Metrics::Repository::StarMetric,
         RepoClinic::Metrics::Repository::LastCommitMetric,
+        RepoClinic::Metrics::Repository::StatusMetric,
       ]
     end
 
@@ -24,7 +25,15 @@ module RepoClinic
                        end
     end
 
+    def status
+      client.combined_status(slug, default_branch)&.state
+    end
+
     private
+
+    def default_branch
+      repository&.dig(:default_branch)
+    end
 
     def client
       @client ||= Octokit::Client.new(access_token: access_token)
