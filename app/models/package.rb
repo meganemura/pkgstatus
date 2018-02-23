@@ -28,7 +28,16 @@ class Package
   def registry_package
     # XXX: Where to separate registries
     # TODO: Detect registry_package class
-    RepoClinic::RegistryPackages::RubygemsPackage.new(name)
+    klass = case registry.to_s
+            when 'rubygems'
+              RepoClinic::RegistryPackages::RubygemsPackage
+            when 'npm'
+              RepoClinic::RegistryPackages::NpmPackage
+            else
+              nil
+            end
+
+    klass.new(name) if klass
   end
 
   def repository

@@ -5,7 +5,7 @@ module RepoClinic
     end
 
     def read(source)
-      source.gem_info['downloads']
+      source.downloads
     end
   end
 end
