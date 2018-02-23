@@ -10,7 +10,8 @@ class Package
   end
 
   def metrics
-    Rails.cache.fetch(cache_key, expires_in: 10.minutes) do
+    Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+      # TODO: queue fetch metrics worker and return empty array
       registry_metrics + repository_metrics
     end
   end
@@ -20,7 +21,7 @@ class Package
   end
 
   def repository_metrics
-    repository.metrics
+    repository&.metrics || []
   end
 
   private
@@ -42,6 +43,8 @@ class Package
 
   def repository
     RepoClinic::Repository.from_package(registry, name)
+  rescue
+    nil
   end
 
   def cache_key

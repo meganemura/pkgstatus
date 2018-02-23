@@ -5,7 +5,7 @@ module RepoClinic
     end
 
     def read(source)
-      source.last_commit.dig(:commit, :committer, :date)
+      source.last_commit&.dig(:commit, :committer, :date)
     end
   end
 end

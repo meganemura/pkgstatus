@@ -5,7 +5,7 @@ module RepoClinic
     end
 
     def read(source)
-      source.repository[:stargazers_count]
+      source.repository&.dig(:stargazers_count)
     end
   end
 end
