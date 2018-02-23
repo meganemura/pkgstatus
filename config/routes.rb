@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # Sidekiq
+  if Rails.env.development?
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   get '/projects/:id', to: 'projects#show'
 
   constraints = {
