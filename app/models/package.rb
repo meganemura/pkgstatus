@@ -11,6 +11,7 @@ class Package
 
   def metrics
     Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+      # TODO: queue fetch metrics worker and return empty array
       registry_metrics + repository_metrics
     end
   end
