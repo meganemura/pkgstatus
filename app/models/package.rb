@@ -42,6 +42,8 @@ class Package
 
   def repository
     RepoClinic::Repository.from_package(registry, name)
+  rescue
+    nil
   end
 
   def cache_key
