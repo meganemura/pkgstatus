@@ -10,10 +10,20 @@ class Package
   end
 
   def metrics
-    Rails.cache.fetch(cache_key, expires_in: 12.hours) do
-      # TODO: queue fetch metrics worker and return empty array
-      registry_metrics + repository_metrics
-    end
+    cached = Rails.cache.read(cache_key)
+    return cached if cached
+
+    # TODO: queueing
+    cache_metrics
+
+    []
+  end
+
+  def cache_metrics
+    return if Rails.cache.exist?(cache_key)
+
+    metrics = registry_metrics + repository_metrics
+    Rails.cache.write(cache_key, metrics, expires_in: 12.hours)
   end
 
   def registry_metrics
