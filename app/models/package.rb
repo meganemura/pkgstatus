@@ -20,7 +20,7 @@ class Package
   end
 
   def repository_metrics
-    repository.metrics
+    repository&.metrics || []
   end
 
   private
