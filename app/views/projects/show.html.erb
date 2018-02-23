@@ -1,16 +1,12 @@
-<%= @project.inspect %>
-<br/>
-<ul>
+<table>
 <%- @project.packages.each do |package| -%>
-  <li>
-    <%= package.name %>
-    <ul>
-      <%- package.metrics.each do |metric| -%>
-        <li>
-          <%= metric.title %>: <%= metric.value %>
-        </li>
-      <%- end -%>
-    </ul>
-  </li>
+  <tr>
+    <td><%= package.registry %>: <%= package.name %></td>
+    <%- package.metrics.each do |metric| -%>
+      <td>
+        <%= metric.title %>: <%= metric.value %>
+      </td>
+    <%- end -%>
+  </tr>
 <%- end -%>
-</ul>
+</table>
