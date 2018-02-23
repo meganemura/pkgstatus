@@ -31,7 +31,7 @@ module RepoClinic
     end
 
     def access_token
-      ENV['REPOCHECK_GITHUB_TOKEN']
+      ENV['REPOCLINIC_GITHUB_TOKEN']
     end
   end
 end
