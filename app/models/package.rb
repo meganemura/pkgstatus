@@ -25,6 +25,18 @@ class Package
     Rails.cache.write(cache_key, metrics, expires_in: 12.hours)
   end
 
+  def self.metric_classes
+    registry_metric_classes + repository_metric_classes
+  end
+
+  def self.registry_metric_classes
+    RepoClinic::RegistryPackages::RubygemsPackage.metric_classes
+  end
+
+  def self.repository_metric_classes
+    RepoClinic::Repositories::GithubRepository.metric_classes
+  end
+
   def registry_metrics
     registry_package.metrics
   end
