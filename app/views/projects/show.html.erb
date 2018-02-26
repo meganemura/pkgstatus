@@ -1,12 +1,22 @@
-<table>
-<%- @project.packages.each do |package| -%>
+<table class="table">
   <tr>
-    <td><%= package.registry %>: <%= package.name %></td>
+    <th>Registry</th>
+    <th>Package name</th>
+    <%- Package.metric_classes.each do |metric_class| -%>
+    <th>
+      <%= metric_class.title %>
+    </th>
+    <%- end -%>
+  </tr>
+  <%- @project.packages.each do |package| -%>
+  <tr>
+    <td><%= package.registry %></td>
+    <td><%= package.name %></td>
     <%- package.metrics.each do |metric| -%>
       <td>
-        <%= metric.title %>: <%= metric.value %>
+        <%= metric.value %>
       </td>
     <%- end -%>
   </tr>
-<%- end -%>
+  <%- end -%>
 </table>
