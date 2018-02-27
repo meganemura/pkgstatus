@@ -9,20 +9,28 @@ class Package
     end
   end
 
-  def metrics
-    cached = Rails.cache.read(cache_key)
-    return cached if cached
-
-    FetchMetricsWorker.perform_async(registry, name)
-
-    []
+  def cached
+    Rails.cache.read(cache_key)
   end
 
-  def cache_metrics
-    return if Rails.cache.exist?(cache_key)
+  def cached?
+    Rails.cache.exist?(cache_key)
+  end
 
-    metrics = registry_metrics + repository_metrics
-    Rails.cache.write(cache_key, metrics, expires_in: 12.hours)
+  def cache_later
+    return if cached?
+    FetchMetricsWorker.perform_async(registry, name)
+  end
+
+  def cache
+    return cached if cached?
+
+    data = {
+      repository_url: repository_url,
+      metrics:  registry_metrics + repository_metrics,
+    }
+
+    Rails.cache.write(cache_key, data, expires_in: 12.hours)
   end
 
   def self.metric_classes
@@ -43,6 +51,14 @@ class Package
 
   def repository_metrics
     repository&.metrics || []
+  end
+
+  def repository_url
+    repository.html_url
+  end
+
+  def registry_url
+    registry_package.html_url
   end
 
   private

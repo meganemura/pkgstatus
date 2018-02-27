@@ -31,6 +31,10 @@ module RepoClinic
       nil
     end
 
+    def html_url
+      repository[:html_url]
+    end
+
     private
 
     def default_branch

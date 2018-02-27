@@ -10,12 +10,30 @@
   </tr>
   <%- @project.packages.each do |package| -%>
   <tr>
-    <td><%= package.registry %></td>
-    <td><%= package.name %></td>
-    <%- package.metrics.each do |metric| -%>
+    <%- if package.cached? -%>
       <td>
-        <%= metric.value %>
+        <a href="<%= package.registry_url %>">
+          <%= package.registry %>
+        </a>
       </td>
+      <td>
+        <a href="<%= package.cached[:repository_url] %>">
+          <i class="fa fa-github" aria-hidden="true"></i>
+          <%= package.name %>
+        </a>
+      </td>
+      <%- package.cached[:metrics].each do |metric| -%>
+        <td>
+          <%= metric.value %>
+        </td>
+      <%- end -%>
+    <%- else -%>
+      <td>
+        <a href="<%= package.registry_url %>">
+          <%= package.registry %>
+        </a>
+      </td>
+      <td><%= package.name %></td>
     <%- end -%>
   </tr>
   <%- end -%>
