@@ -7,5 +7,11 @@ module RepoClinic
     def read(source)
       source.repository&.dig(:stargazers_count)
     end
+
+    def status
+      return :success if value > 1_000
+      return :warning if value > 50
+      :danger
+    end
   end
 end

@@ -13,5 +13,14 @@ module RepoClinic
     def title
       self.class.title
     end
+
+    # FIXME
+    def status
+      :warning
+    end
+
+    def class_name
+      status
+    end
   end
 end

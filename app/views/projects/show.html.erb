@@ -24,7 +24,9 @@
       </td>
       <%- package.cached[:metrics].each do |metric| -%>
         <td>
-          <%= metric.value %>
+          <span class="tag is-<%= metric.class_name %>">
+            <%= metric.value %>
+          </span>
         </td>
       <%- end -%>
     <%- else -%>
