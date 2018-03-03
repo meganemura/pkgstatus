@@ -22,6 +22,7 @@ gem 'codestatus' # RepoClinic::Repository
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do
