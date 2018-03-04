@@ -34,6 +34,10 @@ module RepoClinic
         File.join(NPM_REGISTRY_ENDPOINT, slash_escaped_package)
       end
 
+      def html_url
+        "https://www.npmjs.com/package/#{name}"
+      end
+
       # for scoped package
       #   For example, to access @atlassian/aui information,
       #   we must use https://registry.npmjs.org/@atlassian%2Faui,

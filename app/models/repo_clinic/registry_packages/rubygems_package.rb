@@ -30,6 +30,10 @@ module RepoClinic
       def downloads
         gem_info['downloads']
       end
+
+      def html_url
+        "https://rubygems.org/gems/#{name}"
+      end
     end
   end
 end

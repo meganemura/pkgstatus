@@ -1,12 +1,42 @@
-<table>
-<%- @project.packages.each do |package| -%>
+<table class="table">
   <tr>
-    <td><%= package.registry %>: <%= package.name %></td>
-    <%- package.metrics.each do |metric| -%>
-      <td>
-        <%= metric.title %>: <%= metric.value %>
-      </td>
+    <th>Registry</th>
+    <th>Package name</th>
+    <%- Package.metric_classes.each do |metric_class| -%>
+    <th>
+      <%= metric_class.title %>
+    </th>
     <%- end -%>
   </tr>
-<%- end -%>
+  <%- @project.packages.each do |package| -%>
+  <tr>
+    <%- if package.cached? -%>
+      <td>
+        <a href="<%= package.registry_url %>">
+          <%= package.registry %>
+        </a>
+      </td>
+      <td>
+        <a href="<%= package.cached[:repository_url] %>">
+          <i class="fa fa-github" aria-hidden="true"></i>
+          <%= package.name %>
+        </a>
+      </td>
+      <%- package.cached[:metrics].each do |metric| -%>
+        <td>
+          <span class="tag is-<%= metric.class_name %>">
+            <%= metric.value %>
+          </span>
+        </td>
+      <%- end -%>
+    <%- else -%>
+      <td>
+        <a href="<%= package.registry_url %>">
+          <%= package.registry %>
+        </a>
+      </td>
+      <td><%= package.name %></td>
+    <%- end -%>
+  </tr>
+  <%- end -%>
 </table>

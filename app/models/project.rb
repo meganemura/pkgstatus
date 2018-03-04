@@ -8,8 +8,8 @@ class Project
     y = sample_npm_packages.map { |x| ['npm', x] }
 
     if Rails.env.development?
-      x = x.sample(10)
-      y = y.sample(10)
+      # x = x.sample(10)
+      # y = y.sample(10)
     end
 
     pkgs = x + y
