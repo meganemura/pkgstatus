@@ -20,7 +20,7 @@ module RepoClinic
     end
 
     def class_name
-      status
+      :warning
     end
   end
 end

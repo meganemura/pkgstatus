@@ -9,9 +9,15 @@ class Package
     end
   end
 
-  def cached
+  attr_writer :resources
+  def resources
+    @resources ||= cached_resources || {}
+  end
+
+  def cached_resources
     Rails.cache.read(cache_key)
   end
+  alias_method :cached, :cached_resources  # TODO: Deprecated
 
   def cached?
     Rails.cache.exist?(cache_key)
@@ -23,14 +29,22 @@ class Package
   end
 
   def cache
-    return cached if cached?
+    return cached_resources if cached?
 
     data = {
       repository_url: repository_url,
       metrics:  registry_metrics + repository_metrics,
+      registry: registry_package.resource,
+      repository: repository.resource,
     }
 
-    Rails.cache.write(cache_key, data, expires_in: 12.hours)
+    Rails.cache.write(cache_key, data, expires_in: cache_ttl)
+  end
+
+  def cache_ttl
+    return rand(1..10).minutes if Rails.env.development?
+
+    12.hours
   end
 
   def self.metric_classes
@@ -54,7 +68,7 @@ class Package
   end
 
   def repository_url
-    repository.html_url
+    repository&.html_url
   end
 
   def registry_url
@@ -64,6 +78,8 @@ class Package
   private
 
   def registry_package
+    return @registry_package if defined?(@registry_package)
+
     # XXX: Where to separate registries
     # TODO: Detect registry_package class
     klass = case registry.to_s
@@ -75,11 +91,17 @@ class Package
               nil
             end
 
-    klass.new(name) if klass
+    return unless klass
+
+    @registry_package = klass.new(name).tap do |pkg|
+      pkg.resource = resources[:registry]
+    end
   end
 
   def repository
-    RepoClinic::Repository.from_package(registry, name)
+    @repository ||= RepoClinic::Repository.from_package(registry, name).tap do |repo|
+      repo.resource = resources[:repository]
+    end
   rescue
     nil
   end
