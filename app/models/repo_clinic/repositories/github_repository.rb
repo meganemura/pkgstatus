@@ -32,7 +32,7 @@ module RepoClinic
     end
 
     def html_url
-      repository[:html_url]
+      repository&.dig(:html_url)
     end
 
     private
