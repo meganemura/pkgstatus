@@ -42,7 +42,7 @@ class Package
   end
 
   def cache_ttl
-    return rand(1..10).minutes if Rails.env.development?
+    return rand(10..60).minutes if Rails.env.development?
 
     12.hours
   end
