@@ -9,7 +9,7 @@ module RepoClinic
 
       def self.metric_classes
         [
-          Metrics::RegistryPackage::DownloadsMetric,
+          ::RepoClinic::Metrics::RegistryPackage::DownloadsMetric,
         ]
       end
 
