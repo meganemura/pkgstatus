@@ -10,19 +10,19 @@ module RepoClinic
 
     def repository
       resource[:repository] ||= begin
-                                # Sawyer::Resource -> Hash
-                                client.repository(slug).to_hash
-                              rescue Octokit::NotFound
-                                nil
-                              end
+                                  # Sawyer::Resource -> Hash
+                                  client.repository(slug).to_hash
+                                rescue Octokit::NotFound
+                                  nil
+                                end
     end
 
     def last_commit
       resource[:last_commit] ||= begin
-                                 client.commits(slug, per_page: 1).first.to_hash
-                               rescue Octokit::NotFound
-                                 nil
-                               end
+                                   client.commits(slug, per_page: 1).first.to_hash
+                                 rescue Octokit::NotFound
+                                   nil
+                                 end
     end
 
     def status
