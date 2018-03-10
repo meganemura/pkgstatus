@@ -11,10 +11,8 @@
   </head>
 
   <body>
-    <section class="section">
-      <div class="container">
-      <%= yield %>
-      </div>
-    </section>
+    <%= render partial: 'layouts/navigation' %>
+    <%= yield %>
+    <%= render partial: 'layouts/footer' %>
   </body>
 </html>
