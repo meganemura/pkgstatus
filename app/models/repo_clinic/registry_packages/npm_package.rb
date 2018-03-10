@@ -15,6 +15,12 @@ module RepoClinic
         ]
       end
 
+      # Attach resource from cache
+      attr_writer :resource
+      def resource
+        @resource ||= {}
+      end
+
       def metrics
         self.class.metric_classes.map { |klass| klass.new.preload(self) }
       end

@@ -20,6 +20,11 @@ module RepoClinic
       self.class.metric_classes.map { |klass| klass.new.preload(self) }
     end
 
+    def resource
+      @resource ||= {}
+    end
+    attr_writer :resource
+
     class Resolver
       def initialize(registry, name)
         @registry = registry
