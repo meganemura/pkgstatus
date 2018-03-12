@@ -30,7 +30,15 @@
           <%- metric = package.metric_collection[metric_class.to_s] %>
           <%- if metric %>
             <span class="tag is-<%= metric.class_name %>">
-              <%= metric.value %>
+              <%-
+                value = case metric.value
+                        when Time
+                          "#{time_ago_in_words(metric.value)} ago"
+                        else
+                          metric.value
+                        end
+              -%>
+              <%= value %>
             </span>
           <%- end %>
         </td>
