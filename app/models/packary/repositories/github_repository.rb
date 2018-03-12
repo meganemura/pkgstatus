@@ -42,7 +42,7 @@ module Packary
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token).tap do
+      @client ||= Octokit::Client.new(access_token: access_token, per_page: 100).tap do
         puts "client: #{slug}" if Rails.env.development?
       end
     end
