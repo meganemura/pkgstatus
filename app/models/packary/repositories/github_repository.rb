@@ -1,10 +1,10 @@
-module Packagist
-  class Repositories::GithubRepository < Packagist::Repository
+module Packary
+  class Repositories::GithubRepository < Packary::Repository
     def self.metric_classes
       [
-        Packagist::Metrics::Repository::StarMetric,
-        Packagist::Metrics::Repository::LastCommitMetric,
-        Packagist::Metrics::Repository::StatusMetric,
+        Packary::Metrics::Repository::StarMetric,
+        Packary::Metrics::Repository::LastCommitMetric,
+        Packary::Metrics::Repository::StatusMetric,
       ]
     end
 

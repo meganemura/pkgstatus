@@ -1,5 +1,5 @@
-module Packagist
-  class Metrics::RegistryPackage::ReleasesInMetric < Packagist::Metric
+module Packary
+  class Metrics::RegistryPackage::ReleasesInMetric < Packary::Metric
     def self.title
       "Releases in #{DAYS} days"
     end

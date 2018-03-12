@@ -1,5 +1,5 @@
-module Packagist
-  class Metrics::Repository::StatusMetric < Packagist::Metric
+module Packary
+  class Metrics::Repository::StatusMetric < Packary::Metric
     def self.title
       'CI Status'
     end

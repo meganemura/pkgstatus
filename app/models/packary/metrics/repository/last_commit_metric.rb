@@ -1,5 +1,5 @@
-module Packagist
-  class Metrics::Repository::LastCommitMetric < Packagist::Metric
+module Packary
+  class Metrics::Repository::LastCommitMetric < Packary::Metric
     def self.title
       'Last commit'
     end

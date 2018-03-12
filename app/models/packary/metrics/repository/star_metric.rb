@@ -1,5 +1,5 @@
-module Packagist
-  class Metrics::Repository::StarMetric < Packagist::Metric
+module Packary
+  class Metrics::Repository::StarMetric < Packary::Metric
     def self.title
       'GitHub Stars'
     end

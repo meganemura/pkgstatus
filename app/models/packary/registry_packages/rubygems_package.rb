@@ -1,4 +1,4 @@
-module Packagist
+module Packary
   module RegistryPackages
     class RubygemsPackage
       def initialize(name)
@@ -9,9 +9,9 @@ module Packagist
 
       def self.metric_classes
         [
-          ::Packagist::Metrics::RegistryPackage::DownloadsMetric,
-          ::Packagist::Metrics::RegistryPackage::ReleasesMetric,
-          ::Packagist::Metrics::RegistryPackage::ReleasesInMetric,
+          ::Packary::Metrics::RegistryPackage::DownloadsMetric,
+          ::Packary::Metrics::RegistryPackage::ReleasesMetric,
+          ::Packary::Metrics::RegistryPackage::ReleasesInMetric,
         ]
       end
 

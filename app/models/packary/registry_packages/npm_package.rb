@@ -1,4 +1,4 @@
-module Packagist
+module Packary
   module RegistryPackages
     class NpmPackage
       NPM_REGISTRY_ENDPOINT = 'https://registry.npmjs.org/'.freeze
@@ -11,7 +11,7 @@ module Packagist
 
       def self.metric_classes
         [
-          ::Packagist::Metrics::RegistryPackage::DownloadsMetric,
+          ::Packary::Metrics::RegistryPackage::DownloadsMetric,
         ]
       end
 

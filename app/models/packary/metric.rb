@@ -1,4 +1,4 @@
-module Packagist
+module Packary
   class Metric
     attr_reader :value
 
