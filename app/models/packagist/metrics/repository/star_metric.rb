@@ -1,5 +1,5 @@
-module RepoClinic
-  class Metrics::Repository::StarMetric < RepoClinic::Metric
+module Packagist
+  class Metrics::Repository::StarMetric < Packagist::Metric
     def self.title
       'GitHub Stars'
     end

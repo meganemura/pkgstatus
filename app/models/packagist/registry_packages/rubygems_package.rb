@@ -1,4 +1,4 @@
-module RepoClinic
+module Packagist
   module RegistryPackages
     class RubygemsPackage
       def initialize(name)
@@ -9,9 +9,9 @@ module RepoClinic
 
       def self.metric_classes
         [
-          ::RepoClinic::Metrics::RegistryPackage::DownloadsMetric,
-          ::RepoClinic::Metrics::RegistryPackage::ReleasesMetric,
-          ::RepoClinic::Metrics::RegistryPackage::ReleasesInMetric,
+          ::Packagist::Metrics::RegistryPackage::DownloadsMetric,
+          ::Packagist::Metrics::RegistryPackage::ReleasesMetric,
+          ::Packagist::Metrics::RegistryPackage::ReleasesInMetric,
         ]
       end
 

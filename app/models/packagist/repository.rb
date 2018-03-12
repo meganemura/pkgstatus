@@ -1,4 +1,4 @@
-module RepoClinic
+module Packagist
   class Repository
     # FIXME: Detect repository service from uri
     def self.from_package(registry, name)
