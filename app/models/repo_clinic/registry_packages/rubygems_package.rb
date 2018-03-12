@@ -33,6 +33,16 @@ module RepoClinic
                             end
       end
 
+      def gem_versions
+        resource[:versions] ||= begin
+                                  Gems.versions(name)
+                                rescue JSON::ParserError
+                                  # When the package is not found on rubygems,
+                                  # Gems does try to parse html as json and raise JSON::ParserError :sob:
+                                  nil
+                                end
+      end
+
       # for metric
       def downloads
         gem_info&.dig('downloads')
