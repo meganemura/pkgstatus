@@ -31,9 +31,10 @@ class Package
   def cache
     return cached_resources if cached?
 
+    metrics
+
     data = {
       repository_url: repository_url,
-      metrics:  registry_metrics + repository_metrics,
       registry: registry_package.resource,
       repository: repository.resource,
     }
@@ -57,6 +58,16 @@ class Package
 
   def self.repository_metric_classes
     RepoClinic::Repositories::GithubRepository.metric_classes
+  end
+
+  def metric_collection
+    metrics.each_with_object({}) do |metric, hash|
+      hash[metric.class.to_s] = metric
+    end
+  end
+
+  def metrics
+    registry_metrics + repository_metrics
   end
 
   def registry_metrics

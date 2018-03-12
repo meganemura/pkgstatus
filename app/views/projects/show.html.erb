@@ -11,6 +11,7 @@
     <%- end -%>
   </tr>
   <%- @project.packages.each do |package| -%>
+    <%- puts package.name %>
   <tr>
     <%- if package.cached? -%>
       <td>
@@ -24,11 +25,14 @@
           <%= package.name %>
         </a>
       </td>
-      <%- package.cached[:metrics].each do |metric| -%>
+      <%- Package.metric_classes.each do |metric_class| -%>
         <td>
-          <span class="tag is-<%= metric.class_name %>">
-            <%= metric.value %>
-          </span>
+          <%- metric = package.metric_collection[metric_class.to_s] %>
+          <%- if metric %>
+            <span class="tag is-<%= metric.class_name %>">
+              <%= metric.value %>
+            </span>
+          <%- end %>
         </td>
       <%- end -%>
     <%- else -%>

@@ -42,7 +42,9 @@ module RepoClinic
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token)
+      @client ||= Octokit::Client.new(access_token: access_token).tap do
+        puts "client: #{slug}" if Rails.env.development?
+      end
     end
 
     def access_token

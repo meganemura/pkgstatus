@@ -35,7 +35,7 @@ module RepoClinic
 
       # for metric
       def downloads
-        resource[:downloads] = gem_info['downloads']
+        resource[:downloads] ||= gem_info['downloads']
       end
 
       def html_url
