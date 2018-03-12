@@ -1,4 +1,4 @@
-module Packagist
+module Packary
   class MetricSource
     def initialize
       @source = {}

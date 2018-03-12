@@ -1,5 +1,5 @@
-module Packagist
-  class Metrics::RegistryPackage::DownloadsMetric < Packagist::Metric
+module Packary
+  class Metrics::RegistryPackage::DownloadsMetric < Packary::Metric
     def self.title
       'Downloads'
     end

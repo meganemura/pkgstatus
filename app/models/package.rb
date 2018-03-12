@@ -53,11 +53,11 @@ class Package
   end
 
   def self.registry_metric_classes
-    Packagist::RegistryPackages::RubygemsPackage.metric_classes
+    Packary::RegistryPackages::RubygemsPackage.metric_classes
   end
 
   def self.repository_metric_classes
-    Packagist::Repositories::GithubRepository.metric_classes
+    Packary::Repositories::GithubRepository.metric_classes
   end
 
   def metric_collection
@@ -95,9 +95,9 @@ class Package
     # TODO: Detect registry_package class
     klass = case registry.to_s
             when 'rubygems'
-              Packagist::RegistryPackages::RubygemsPackage
+              Packary::RegistryPackages::RubygemsPackage
             when 'npm'
-              Packagist::RegistryPackages::NpmPackage
+              Packary::RegistryPackages::NpmPackage
             else
               nil
             end
@@ -110,7 +110,7 @@ class Package
   end
 
   def repository
-    @repository ||= Packagist::Repository.from_package(registry, name).tap do |repo|
+    @repository ||= Packary::Repository.from_package(registry, name).tap do |repo|
       repo.resource = resources[:repository]
     end
   rescue
