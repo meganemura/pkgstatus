@@ -23,5 +23,12 @@ module Packary
     def class_name
       status
     end
+
+    private
+
+    # Use this if override value
+    def original_value
+      @value
+    end
   end
 end

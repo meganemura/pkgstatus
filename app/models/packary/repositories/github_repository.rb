@@ -5,6 +5,7 @@ module Packary
         Packary::Metrics::Repository::StarMetric,
         Packary::Metrics::Repository::LastCommitMetric,
         Packary::Metrics::Repository::StatusMetric,
+        Packary::Metrics::Repository::ContributorsMetric,
       ]
     end
 
@@ -31,6 +32,10 @@ module Packary
       nil
     end
 
+    def contributors
+      resource[:contributors] ||= client.contributors(slug)
+    end
+
     def html_url
       repository&.dig(:html_url)
     end
@@ -42,7 +47,7 @@ module Packary
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token).tap do
+      @client ||= Octokit::Client.new(access_token: access_token, per_page: 100).tap do
         puts "client: #{slug}" if Rails.env.development?
       end
     end
