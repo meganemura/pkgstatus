@@ -10,6 +10,7 @@ module RepoClinic
       def self.metric_classes
         [
           ::RepoClinic::Metrics::RegistryPackage::DownloadsMetric,
+          ::RepoClinic::Metrics::RegistryPackage::ReleasesMetric,
         ]
       end
 
