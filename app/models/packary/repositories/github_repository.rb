@@ -53,11 +53,11 @@ module Packary
       repository&.dig(:html_url)
     end
 
-    private
-
     def default_branch
       repository&.dig(:default_branch)
     end
+
+    private
 
     def client
       @client ||= Octokit::Client.new(access_token: access_token, per_page: 100).tap do
