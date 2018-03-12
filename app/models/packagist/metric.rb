@@ -1,4 +1,4 @@
-module RepoClinic
+module Packagist
   class Metric
     attr_reader :value
 

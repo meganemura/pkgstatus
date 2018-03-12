@@ -1,5 +1,5 @@
-module RepoClinic
-  class Metrics::RegistryPackage::ReleasesInMetric < RepoClinic::Metric
+module Packagist
+  class Metrics::RegistryPackage::ReleasesInMetric < Packagist::Metric
     def self.title
       "Releases in #{DAYS} days"
     end

@@ -1,4 +1,4 @@
-module RepoClinic
+module Packagist
   module RegistryPackages
     class NpmPackage
       NPM_REGISTRY_ENDPOINT = 'https://registry.npmjs.org/'.freeze
@@ -11,7 +11,7 @@ module RepoClinic
 
       def self.metric_classes
         [
-          ::RepoClinic::Metrics::RegistryPackage::DownloadsMetric,
+          ::Packagist::Metrics::RegistryPackage::DownloadsMetric,
         ]
       end
 

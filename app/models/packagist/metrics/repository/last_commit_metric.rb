@@ -1,5 +1,5 @@
-module RepoClinic
-  class Metrics::Repository::LastCommitMetric < RepoClinic::Metric
+module Packagist
+  class Metrics::Repository::LastCommitMetric < Packagist::Metric
     def self.title
       'Last commit'
     end

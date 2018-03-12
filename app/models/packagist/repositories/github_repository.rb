@@ -1,10 +1,10 @@
-module RepoClinic
-  class Repositories::GithubRepository < RepoClinic::Repository
+module Packagist
+  class Repositories::GithubRepository < Packagist::Repository
     def self.metric_classes
       [
-        RepoClinic::Metrics::Repository::StarMetric,
-        RepoClinic::Metrics::Repository::LastCommitMetric,
-        RepoClinic::Metrics::Repository::StatusMetric,
+        Packagist::Metrics::Repository::StarMetric,
+        Packagist::Metrics::Repository::LastCommitMetric,
+        Packagist::Metrics::Repository::StatusMetric,
       ]
     end
 

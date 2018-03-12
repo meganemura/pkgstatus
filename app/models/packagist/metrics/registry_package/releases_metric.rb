@@ -1,5 +1,5 @@
-module RepoClinic
-  class Metrics::RegistryPackage::ReleasesMetric < RepoClinic::Metric
+module Packagist
+  class Metrics::RegistryPackage::ReleasesMetric < Packagist::Metric
     def self.title
       'Releases'
     end

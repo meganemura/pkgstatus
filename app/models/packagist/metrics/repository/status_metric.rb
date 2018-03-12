@@ -1,5 +1,5 @@
-module RepoClinic
-  class Metrics::Repository::StatusMetric < RepoClinic::Metric
+module Packagist
+  class Metrics::Repository::StatusMetric < Packagist::Metric
     def self.title
       'CI Status'
     end

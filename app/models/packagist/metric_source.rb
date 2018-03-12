@@ -1,4 +1,4 @@
-module RepoClinic
+module Packagist
   class MetricSource
     def initialize
       @source = {}
