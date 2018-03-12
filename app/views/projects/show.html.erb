@@ -4,6 +4,7 @@
   <tr>
     <th>Registry</th>
     <th>Package name</th>
+    <th>CI</th>
     <%- Package.metric_classes.each do |metric_class| -%>
     <th>
       <%= metric_class.title %>
@@ -23,6 +24,11 @@
         <a href="<%= package.repository_url %>">
           <i class="fa fa-github" aria-hidden="true"></i>
           <%= package.name %>
+        </a>
+      </td>
+      <td>
+        <a href="<%= package.ci_url %>">
+          CI
         </a>
       </td>
       <%- Package.metric_classes.each do |metric_class| -%>

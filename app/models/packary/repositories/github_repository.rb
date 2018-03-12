@@ -28,7 +28,11 @@ module Packary
     end
 
     def status
-      resource[:status] ||= client.combined_status(slug, default_branch)&.state
+      combined_status&.dig(:state)
+    end
+
+    def combined_status
+      resource[:combined_status] ||= client.combined_status(slug, default_branch).to_hash
     rescue Octokit::NotFound
       nil
     end
@@ -49,11 +53,11 @@ module Packary
       repository&.dig(:html_url)
     end
 
-    private
-
     def default_branch
       repository&.dig(:default_branch)
     end
+
+    private
 
     def client
       @client ||= Octokit::Client.new(access_token: access_token, per_page: 100).tap do
