@@ -28,7 +28,11 @@ module Packary
     end
 
     def status
-      resource[:status] ||= client.combined_status(slug, default_branch)&.state
+      combined_status&.dig(:state)
+    end
+
+    def combined_status
+      resource[:combined_status] ||= client.combined_status(slug, default_branch).to_hash
     rescue Octokit::NotFound
       nil
     end
