@@ -24,18 +24,18 @@ module RepoClinic
       end
 
       def gem_info
-        @info ||= begin
-                    Gems.info(name)
-                  rescue JSON::ParserError
-                    # When the package is not found on rubygems,
-                    # Gems does try to parse html as json and raise JSON::ParserError :sob:
-                    nil
-                  end
+        resource[:info] ||= begin
+                              Gems.info(name)
+                            rescue JSON::ParserError
+                              # When the package is not found on rubygems,
+                              # Gems does try to parse html as json and raise JSON::ParserError :sob:
+                              nil
+                            end
       end
 
       # for metric
       def downloads
-        resource[:downloads] = gem_info['downloads']
+        gem_info&.dig('downloads')
       end
 
       def html_url

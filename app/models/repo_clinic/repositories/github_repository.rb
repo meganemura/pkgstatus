@@ -10,19 +10,19 @@ module RepoClinic
 
     def repository
       resource[:repository] ||= begin
-                                # Sawyer::Resource -> Hash
-                                client.repository(slug).to_hash
-                              rescue Octokit::NotFound
-                                nil
-                              end
+                                  # Sawyer::Resource -> Hash
+                                  client.repository(slug).to_hash
+                                rescue Octokit::NotFound
+                                  nil
+                                end
     end
 
     def last_commit
       resource[:last_commit] ||= begin
-                                 client.commits(slug, per_page: 1).first.to_hash
-                               rescue Octokit::NotFound
-                                 nil
-                               end
+                                   client.commits(slug, per_page: 1).first.to_hash
+                                 rescue Octokit::NotFound
+                                   nil
+                                 end
     end
 
     def status
@@ -32,7 +32,7 @@ module RepoClinic
     end
 
     def html_url
-      repository[:html_url]
+      repository&.dig(:html_url)
     end
 
     private
@@ -42,7 +42,9 @@ module RepoClinic
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token)
+      @client ||= Octokit::Client.new(access_token: access_token).tap do
+        puts "client: #{slug}" if Rails.env.development?
+      end
     end
 
     def access_token

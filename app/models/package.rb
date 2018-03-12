@@ -31,9 +31,10 @@ class Package
   def cache
     return cached_resources if cached?
 
+    metrics
+
     data = {
       repository_url: repository_url,
-      metrics:  registry_metrics + repository_metrics,
       registry: registry_package.resource,
       repository: repository.resource,
     }
@@ -59,6 +60,16 @@ class Package
     RepoClinic::Repositories::GithubRepository.metric_classes
   end
 
+  def metric_collection
+    metrics.each_with_object({}) do |metric, hash|
+      hash[metric.class.to_s] = metric
+    end
+  end
+
+  def metrics
+    registry_metrics + repository_metrics
+  end
+
   def registry_metrics
     registry_package.metrics
   end
@@ -78,7 +89,7 @@ class Package
   private
 
   def registry_package
-    return @registry_package if defined?(@registry_package)
+    return @registry_package if @registry_package
 
     # XXX: Where to separate registries
     # TODO: Detect registry_package class
