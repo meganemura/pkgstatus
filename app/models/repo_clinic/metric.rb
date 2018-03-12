@@ -19,8 +19,9 @@ module RepoClinic
       :warning
     end
 
+    # TODO: Move into decorator
     def class_name
-      :warning
+      status
     end
   end
 end
