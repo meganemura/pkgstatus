@@ -11,6 +11,7 @@ module RepoClinic
         [
           ::RepoClinic::Metrics::RegistryPackage::DownloadsMetric,
           ::RepoClinic::Metrics::RegistryPackage::ReleasesMetric,
+          ::RepoClinic::Metrics::RegistryPackage::ReleasesInMetric,
         ]
       end
 
