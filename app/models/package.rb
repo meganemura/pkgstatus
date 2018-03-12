@@ -117,7 +117,7 @@ class Package
     nil
   end
 
-  def cache_key
-    [self.class.name, registry, name].join(':')
+  def cache_key(key = nil)
+    [self.class.name, registry, name, key].compact.join(':')
   end
 end

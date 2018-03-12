@@ -12,6 +12,7 @@ module Packary
           ::Packary::Metrics::RegistryPackage::DownloadsMetric,
           ::Packary::Metrics::RegistryPackage::ReleasesMetric,
           ::Packary::Metrics::RegistryPackage::ReleasesInMetric,
+          ::Packary::Metrics::RegistryPackage::LatestReleaseMetric,
         ]
       end
 
