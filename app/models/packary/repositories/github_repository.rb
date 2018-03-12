@@ -6,6 +6,7 @@ module Packary
         Packary::Metrics::Repository::LastCommitMetric,
         Packary::Metrics::Repository::StatusMetric,
         Packary::Metrics::Repository::ContributorsMetric,
+        Packary::Metrics::Repository::LastClosedIssueMetric,
       ]
     end
 
@@ -34,6 +35,14 @@ module Packary
 
     def contributors
       resource[:contributors] ||= client.contributors(slug)
+    end
+
+    def last_closed_issue
+      closed_issues.first
+    end
+
+    def closed_issues
+      resource[:closed_issues] ||= client.issues(slug, state: 'closed', per_page: 50).map(&:to_h)
     end
 
     def html_url
