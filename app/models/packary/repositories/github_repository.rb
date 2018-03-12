@@ -5,6 +5,7 @@ module Packary
         Packary::Metrics::Repository::StarMetric,
         Packary::Metrics::Repository::LastCommitMetric,
         Packary::Metrics::Repository::StatusMetric,
+        Packary::Metrics::Repository::ContributorsMetric,
       ]
     end
 
@@ -29,6 +30,10 @@ module Packary
       resource[:status] ||= client.combined_status(slug, default_branch)&.state
     rescue Octokit::NotFound
       nil
+    end
+
+    def contributors
+      resource[:contributors] ||= client.contributors(slug)
     end
 
     def html_url
