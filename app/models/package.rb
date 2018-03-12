@@ -90,6 +90,10 @@ class Package
     registry_package.html_url
   end
 
+  def ci_url
+    ci.html_url
+  end
+
   private
 
   def registry_package

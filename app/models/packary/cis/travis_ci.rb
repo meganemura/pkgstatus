@@ -26,6 +26,10 @@ module Packary
       end
       attr_writer :resource
 
+      def html_url
+        "https://travis-ci.org/#{slug}" if repository
+      end
+
       # FIXME: Ruby specific
       def configured_versions
         last_build.dig('config', 'rvm')
@@ -37,12 +41,12 @@ module Packary
 
       def repository
         client.repo(slug)
-      rescue Travis::Client::NotFound
+      rescue ::Travis::Client::NotFound
         nil
       end
 
       def client
-        @client ||= Travis::Client.new
+        @client ||= ::Travis::Client.new
       end
     end
   end
