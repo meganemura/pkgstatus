@@ -47,6 +47,7 @@ GEM
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    backports (3.11.1)
     bindex (0.5.0)
     bootsnap (1.1.8)
       msgpack (~> 1.0)
@@ -80,14 +81,26 @@ GEM
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
     erubi (1.7.0)
+    ethon (0.11.0)
+      ffi (>= 1.3.0)
     execjs (2.7.0)
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.12.2)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.9.21)
     gems (1.0.0)
       json
+    gh (0.14.0)
+      addressable
+      backports
+      faraday (~> 0.8)
+      multi_json (~> 1.0)
+      net-http-persistent (>= 2.7)
+      net-http-pipeline
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    highline (1.7.10)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.4)
@@ -97,6 +110,8 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     json (2.1.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -119,6 +134,9 @@ GEM
     msgpack (1.2.2)
     multi_json (1.13.1)
     multipart-post (2.0.0)
+    net-http-persistent (3.0.0)
+      connection_pool (~> 2.2)
+    net-http-pipeline (1.0.1)
     netrc (0.11.0)
     nio4r (2.2.0)
     nokogiri (1.8.2)
@@ -136,6 +154,9 @@ GEM
       pry (>= 0.10.4)
     public_suffix (3.0.1)
     puma (3.11.2)
+    pusher-client (0.6.2)
+      json
+      websocket (~> 1.0)
     rack (2.0.4)
     rack-protection (2.0.1)
       rack
@@ -224,6 +245,17 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    travis (1.8.8)
+      backports
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.9, >= 0.9.1)
+      gh (~> 0.13)
+      highline (~> 1.6)
+      launchy (~> 2.1)
+      pusher-client (~> 0.4)
+      typhoeus (~> 0.6, >= 0.6.8)
+    typhoeus (0.8.0)
+      ethon (>= 0.8.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.6)
@@ -236,6 +268,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    websocket (1.2.5)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -265,6 +298,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   sidekiq
+  travis
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
 
