@@ -31,12 +31,16 @@ class Package
   def cache
     return cached_resources if cached?
 
+    # FIXME: Implement #cache to registry_package, repository
     metrics
+
+    ci.load_resource
 
     data = {
       repository_url: repository_url,
       registry: registry_package.resource,
       repository: repository.resource,
+      ci: ci.resource,
     }
 
     Rails.cache.write(cache_key, data, expires_in: cache_ttl)
@@ -115,6 +119,12 @@ class Package
     end
   rescue
     nil
+  end
+
+  def ci
+    @ci ||= Packary::Cis::TravisCi.new(repository.slug, repository.default_branch).tap do |c|
+      c.resource = resources[:ci]
+    end
   end
 
   def cache_key(key = nil)

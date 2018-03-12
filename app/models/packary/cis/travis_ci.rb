@@ -1,0 +1,49 @@
+module Packary
+  module Cis
+    class TravisCi
+      def initialize(slug, default_branch)
+        @slug = slug
+        @default_branch = default_branch
+      end
+
+      attr_reader :slug, :default_branch
+
+      def load_resource
+        last_build
+      end
+
+      def self.metric_classes
+        [
+        ]
+      end
+
+      def metrics
+        self.class.metric_classes.map { |klass| klass.new.preload(self) }
+      end
+
+      def resource
+        @resource ||= {}
+      end
+      attr_writer :resource
+
+      # FIXME: Ruby specific
+      def configured_versions
+        last_build.dig('config', 'rvm')
+      end
+
+      def last_build
+        resource[:last_build] ||= repository&.branch(default_branch)&.to_h
+      end
+
+      def repository
+        client.repo(slug)
+      rescue Travis::Client::NotFound
+        nil
+      end
+
+      def client
+        @client ||= Travis::Client.new
+      end
+    end
+  end
+end
