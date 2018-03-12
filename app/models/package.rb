@@ -89,7 +89,7 @@ class Package
   private
 
   def registry_package
-    return @registry_package if defined?(@registry_package)
+    return @registry_package if @registry_package
 
     # XXX: Where to separate registries
     # TODO: Detect registry_package class
