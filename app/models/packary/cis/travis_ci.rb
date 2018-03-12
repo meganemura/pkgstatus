@@ -32,11 +32,15 @@ module Packary
 
       # FIXME: Ruby specific
       def configured_versions
-        last_build.dig('config', 'rvm')
+        last_build&.dig('config', 'rvm') || []
       end
 
       def last_build
-        resource[:last_build] ||= repository&.branch(default_branch)&.to_h
+        resource[:last_build] ||= begin
+                                    repository&.branch(default_branch)&.to_h
+                                  rescue ::Travis::Client::NotFound
+                                    nil
+                                  end
       end
 
       def repository
