@@ -1,14 +1,4 @@
-class Package
-  attr_accessor :registry, :name
-
-  # XXX
-  def self.find_by(registry:, name:)
-    new.tap do |pkg|
-      pkg.registry = registry
-      pkg.name = name
-    end
-  end
-
+class Package < ApplicationRecord
   attr_writer :resources
   def resources
     @resources ||= cached_resources || {}
