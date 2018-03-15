@@ -28,9 +28,11 @@
         </a>
       </td>
       <td>
-        <a href="<%= package.ci_url %>">
-          CI
-        </a>
+        <%- if package.ci_url %>
+          <a href="<%= package.ci_url %>">
+            CI
+          </a>
+        <%- end %>
       </td>
       <td>
         <%- versions = package.send(:ci).configured_versions %>
