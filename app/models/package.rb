@@ -1,4 +1,7 @@
 class Package < ApplicationRecord
+  has_many :project_packages
+  has_many :projects, through: :project_packages
+
   attr_writer :resources
   def resources
     @resources ||= cached_resources || {}
