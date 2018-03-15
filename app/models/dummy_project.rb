@@ -14,7 +14,7 @@ class DummyProject
 
     pkgs = x + y
 
-    pkgs.map { |registry, name| Package.find_by(registry: registry, name: name) }
+    pkgs.map { |registry, name| Package.new(registry: registry, name: name) }
   end
 
   private
