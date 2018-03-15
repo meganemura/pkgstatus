@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_15_153147) do
+ActiveRecord::Schema.define(version: 2018_03_15_161622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "registry", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registry", "name"], name: "index_packages_on_registry_and_name", unique: true
+  end
+
+  create_table "project_packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "project_id"
+    t.uuid "package_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_project_packages_on_package_id"
+    t.index ["project_id"], name: "index_project_packages_on_project_id"
+  end
+
+  create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "project_packages", "packages"
+  add_foreign_key "project_packages", "projects"
 end
