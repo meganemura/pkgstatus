@@ -1,0 +1,39 @@
+<section class="hero is-medium is-light is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        pkgstatus.org
+      </h1>
+      <h2 class="subtitle">
+        Monitoring health of packages
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+<div class="container has-text-centered">
+  <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+      <h2 class="subtitle">
+        <i class="fa fa-diamond" aria-hidden="true"></i>
+        rubygems
+      </h2>
+
+      <%= form_tag("/projects", method: :post) do %>
+      <div class="field">
+        <div class="control">
+          <%- placeholder = %w(rails jekyll rubocop ...).join("\n") -%>
+          <textarea name="packages" class="textarea is-medium" type="text" placeholder="<%= placeholder %>" rows="10" required></textarea>
+        </div>
+      </div>
+
+      <div class="has-text-centered">
+        <button class="button is-medium" type="submit">
+          Create a new project
+        </button>
+      </div>
+      <%- end -%>
+    </div>
+  </div>
+</div>
+</section>
