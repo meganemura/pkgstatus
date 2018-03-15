@@ -2,6 +2,24 @@ class Package < ApplicationRecord
   has_many :project_packages
   has_many :projects, through: :project_packages
 
+  # https://github.com/rubygems/rubygems.org/blob/master/lib/patterns.rb
+  RUBYGEMS_SPECIAL_CHARACTERS = ".-_".freeze
+  RUBYGEMS_ALLOWED_CHARACTERS = "[A-Za-z0-9#{Regexp.escape(RUBYGEMS_SPECIAL_CHARACTERS)}]+".freeze
+  RUBYGEMS_NAME_PATTERN       = /\A#{RUBYGEMS_ALLOWED_CHARACTERS}\Z/
+
+  validates :registry, presence: true
+  validates :name, presence: true
+  validate :rubygem_naming, if: :rubygem?
+
+  def rubygem_naming
+    return if name.match?(RUBYGEMS_NAME_PATTERN)
+    errors.add(:name, 'Given name is not allowed.')
+  end
+
+  def rubygem?
+    registry == 'rubygems'
+  end
+
   attr_writer :resources
   def resources
     @resources ||= cached_resources || {}

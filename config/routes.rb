@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  get '/projects/:id', to: 'projects#show'
+  get '/projects/:id', to: 'projects#show', as: 'project'
   post '/projects', to: 'projects#create'
 
   constraints = {
