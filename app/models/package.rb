@@ -71,7 +71,9 @@ class Package
   end
 
   def metrics
-    registry_metrics + repository_metrics
+    Rails.cache.fetch(cache_key('metrics'), expires_in: cache_ttl) do
+      registry_metrics + repository_metrics
+    end
   end
 
   def registry_metrics
