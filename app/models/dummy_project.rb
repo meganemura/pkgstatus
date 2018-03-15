@@ -1,4 +1,4 @@
-class Project
+class DummyProject
   def self.find(id)
     new
   end
