@@ -7,9 +7,9 @@ class ProjectsController < ApplicationController
   def create
     package_names = packages_param.lines
     project = Project.new
-    package_names.each do |name|
+    package_names.map(&:strip).uniq.each do |name|
       next if name.blank?
-      project.packages << Package.find_or_initialize_by(registry: 'rubygems', name: name.strip)
+      project.packages << Package.find_or_initialize_by(registry: 'rubygems', name: name)
     end
 
     if project.save
