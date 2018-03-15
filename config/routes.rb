@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   get '/projects/:id', to: 'projects#show'
+  post '/projects', to: 'projects#create'
 
   constraints = {
     registry: %r{(?!stylesheets|javascripts)[^/]*},
