@@ -1,73 +1,9 @@
+<section class="section">
 <div class="container">
 <div class="content has-text-centered">
-<table class="table">
-  <tr>
-    <th>Registry</th>
-    <th>Package name</th>
-    <th>CI</th>
-    <th>Language Versions</th>
-    <%- Package.metric_classes.each do |metric_class| -%>
-    <th>
-      <%= metric_class.title %>
-    </th>
-    <%- end -%>
-  </tr>
-  <%- @project.packages.each do |package| -%>
-    <%- puts package.name %>
-  <tr>
-    <%- if package.cached? -%>
-      <td>
-        <a href="<%= package.registry_url %>">
-          <%= package.registry %>
-        </a>
-      </td>
-      <td>
-        <a href="<%= package.repository_url %>">
-          <i class="fa fa-github" aria-hidden="true"></i>
-          <%= package.name %>
-        </a>
-      </td>
-      <td>
-        <%- if package.ci_url %>
-          <a href="<%= package.ci_url %>">
-            CI
-          </a>
-        <%- end %>
-      </td>
-      <td>
-        <%- versions = package.send(:ci).configured_versions %>
-        <%- if versions.present? %>
-          <%= versions.size %> versions
-        <%- end %>
-      </td>
-      <%- Package.metric_classes.each do |metric_class| -%>
-        <td>
-          <%- metric = package.metric_collection[metric_class.to_s] %>
-          <%- if metric %>
-            <span class="tag is-<%= metric.class_name %>">
-              <%-
-                value = case metric.value
-                        when Time
-                          "#{time_ago_in_words(metric.value)} ago"
-                        else
-                          metric.value
-                        end
-              -%>
-              <%= value %>
-            </span>
-          <%- end %>
-        </td>
-      <%- end -%>
-    <%- else -%>
-      <td>
-        <a href="<%= package.registry_url %>">
-          <%= package.registry %>
-        </a>
-      </td>
-      <td><%= package.name %></td>
-    <%- end -%>
-  </tr>
-  <%- end -%>
-</table>
+<%- @project.packages.each do |package| -%>
+<%= render partial: 'package', locals: { package: package } %>
+<%- end -%>
 </div>
 </div>
+</section>

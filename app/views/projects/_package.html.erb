@@ -1,0 +1,65 @@
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong><%= package.name %></strong>
+
+          <small>
+            <a href="<%= package.registry_url %>">
+              <i class="fa fa-diamond" aria-hidden="true"></i>
+              <%= package.registry %>
+            </a>
+          </small>
+
+          <%- if package.cached? %>
+
+            <small>
+              <a href="<%= package.repository_url %>">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <%= package.name %>
+              </a>
+            </small>
+
+            <small>
+              <%- if package.ci_url %>
+                <a href="<%= package.ci_url %>">
+                  <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                  CI
+                  <%- versions = package.send(:ci).configured_versions %>
+                  <%- if versions.present? %>
+                    (<%= versions.size %> ruby versions)
+                  <%- end %>
+                </a>
+              <%- end %>
+            </small>
+            <br>
+            <div class="field is-grouped is-grouped-multiline">
+            <%- Package.metric_classes.each do |metric_class| -%>
+              <div class="control">
+                <%- metric = package.metric_collection[metric_class.to_s] %>
+                <%- if metric %>
+                  <div class="tags has-addons">
+                    <span class="tag"><%= metric.class.title %></span>
+                    <span class="tag is-<%= metric.class_name %>">
+                      <%-
+                        value = case metric.value
+                                when Time
+                                  "#{time_ago_in_words(metric.value)} ago"
+                                else
+                                  metric.value
+                                end
+                      -%>
+                      <%= value %>
+                    </span>
+                  </div>
+                <%- end %>
+              </div>
+            <%- end -%>
+            </div>
+          <%- end -%>
+        </p>
+      </div>
+    </div>
+  </article>
+</div>
