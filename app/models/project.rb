@@ -7,9 +7,9 @@ class Project
     x = sample_rubygems_packages.map { |x| ['rubygems', x] }
     y = sample_npm_packages.map { |x| ['npm', x] }
 
-    if Rails.env.development?
-      x = x.first(10)
-      y = y.first(10)
+    if Rails.env.development? || ENV['PKGSTATUS_MIN_PACKAGES']
+      x = x.first(6)
+      y = y.first(3)
     end
 
     pkgs = x + y

@@ -27,22 +27,35 @@ module Packary
       attr_writer :resource
 
       def html_url
-        "https://travis-ci.org/#{slug}" if repository
+        "https://travis-ci.org/#{slug}" if active?
       end
 
       # FIXME: Ruby specific
       def configured_versions
-        last_build.dig('config', 'rvm')
+        last_build&.dig('config', 'rvm') || []
       end
 
       def last_build
-        resource[:last_build] ||= repository&.branch(default_branch)&.to_h
+        resource[:last_build] ||= begin
+                                    repository&.branch(default_branch)&.to_h
+                                  rescue ::Travis::Client::NotFound
+                                    nil
+                                  end
       end
 
       def repository
-        client.repo(slug)
+        client.repo(slug).tap do |repo|
+          resource[:active] ||= repo.active?
+        end
       rescue ::Travis::Client::NotFound
         nil
+      end
+
+      def active?
+        # load repository
+        repository unless resource.key?(:active)
+
+        resource[:active]
       end
 
       def client

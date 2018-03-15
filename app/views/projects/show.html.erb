@@ -5,6 +5,7 @@
     <th>Registry</th>
     <th>Package name</th>
     <th>CI</th>
+    <th>Language Versions</th>
     <%- Package.metric_classes.each do |metric_class| -%>
     <th>
       <%= metric_class.title %>
@@ -27,9 +28,17 @@
         </a>
       </td>
       <td>
-        <a href="<%= package.ci_url %>">
-          CI
-        </a>
+        <%- if package.ci_url %>
+          <a href="<%= package.ci_url %>">
+            CI
+          </a>
+        <%- end %>
+      </td>
+      <td>
+        <%- versions = package.send(:ci).configured_versions %>
+        <%- if versions.present? %>
+          <%= versions.size %> versions
+        <%- end %>
       </td>
       <%- Package.metric_classes.each do |metric_class| -%>
         <td>
