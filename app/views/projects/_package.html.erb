@@ -37,9 +37,9 @@
             <br>
             <%- Package.metric_classes.group_by(&:group).each do |group, metric_classes| -%>
               <div class="content">
-              <h6 class="subtitle is-6">
-              <%= group.to_s.capitalize %>
-              </h5>
+              <p class="heading">
+              <%= group %>
+              </p>
               <div class="field is-grouped is-grouped-multiline">
               <%- metric_classes.each do |metric_class| -%>
                 <div class="control">
