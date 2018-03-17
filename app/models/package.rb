@@ -82,17 +82,19 @@ class Package < ApplicationRecord
   end
 
   def metrics
-    Rails.cache.fetch(cache_key('metrics'), expires_in: cache_ttl) do
-      registry_metrics + repository_metrics
-    end
+    registry_metrics + repository_metrics
   end
 
   def registry_metrics
-    registry_package.metrics
+    Rails.cache.fetch(cache_key(__method__), expires_in: cache_ttl) do
+      registry_package.metrics
+    end
   end
 
   def repository_metrics
-    repository&.metrics || []
+    Rails.cache.fetch(cache_key(__method__), expires_in: cache_ttl) do
+      repository&.metrics || []
+    end
   end
 
   def repository_url

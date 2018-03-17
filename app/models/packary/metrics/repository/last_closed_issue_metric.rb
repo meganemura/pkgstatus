@@ -1,5 +1,9 @@
 module Packary
   class Metrics::Repository::LastClosedIssueMetric < Packary::Metric
+    def self.group
+      :repository
+    end
+
     def self.title
       'Last Closed Issue'
     end

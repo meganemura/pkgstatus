@@ -1,3 +1,4 @@
+<a name="<%= [package.registry, package.name].join('-') %>"></a>
 <div class="box">
   <article class="media">
     <div class="media-content">
@@ -34,29 +35,39 @@
               <%- end %>
             </small>
             <br>
-            <div class="field is-grouped is-grouped-multiline">
-            <%- Package.metric_classes.each do |metric_class| -%>
-              <div class="control">
-                <%- metric = package.metric_collection[metric_class.to_s] %>
-                <%- if metric %>
-                  <div class="tags has-addons">
-                    <span class="tag"><%= metric.class.title %></span>
-                    <span class="tag is-<%= metric.class_name %>">
-                      <%-
-                        value = case metric.value
-                                when Time
-                                  "#{time_ago_in_words(metric.value)} ago"
-                                else
-                                  metric.value
-                                end
-                      -%>
-                      <%= value %>
-                    </span>
-                  </div>
-                <%- end %>
+            <%- Package.metric_classes.group_by(&:group).each do |group, metric_classes| -%>
+              <div class="content">
+              <h6 class="subtitle is-6">
+              <%= group.to_s.capitalize %>
+              </h5>
+              <div class="field is-grouped is-grouped-multiline">
+              <%- metric_classes.each do |metric_class| -%>
+                <div class="control">
+                  <%- metric = package.metric_collection[metric_class.to_s] %>
+                  <%- if metric %>
+                    <div class="tags has-addons">
+                      <span class="tag"><%= metric.class.title %></span>
+                      <span class="tag is-<%= metric.class_name %>">
+                        <%-
+                          value = case metric.value
+                                  when Time
+                                    "#{time_ago_in_words(metric.value)} ago"
+                                  else
+                                    metric.value
+                                  end
+                        -%>
+                        <%= value %>
+                      </span>
+                    </div>
+                  <%- end %>
+                </div>
+              <%- end -%>
+              </div>
               </div>
             <%- end -%>
-            </div>
+          <%- else -%>
+            <p>Please wait a while until loading.</p>
+            <%= link_to 'reload', "?t=#{rand}##{[package.registry, package.name].join('-')}" %>
           <%- end -%>
         </p>
       </div>

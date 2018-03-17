@@ -1,5 +1,9 @@
 module Packary
   class Metrics::Repository::StatusMetric < Packary::Metric
+    def self.group
+      :repository
+    end
+
     def self.title
       'CI Status'
     end
