@@ -45,13 +45,13 @@ class Package < ApplicationRecord
     # FIXME: Implement #cache to registry_package, repository
     metrics
 
-    ci.load_resource
+    ci&.load_resource
 
     data = {
       repository_url: repository_url,
       registry: registry_package.resource,
-      repository: repository.resource,
-      ci: ci.resource,
+      repository: repository&.resource,
+      ci: ci&.resource,
     }
 
     Rails.cache.write(cache_key, data, expires_in: cache_ttl)
@@ -106,7 +106,7 @@ class Package < ApplicationRecord
   end
 
   def ci_url
-    ci.html_url
+    ci&.html_url
   end
 
   private
@@ -141,6 +141,8 @@ class Package < ApplicationRecord
   end
 
   def ci
+    return nil unless repository
+
     @ci ||= Packary::Cis::TravisCi.new(repository.slug, repository.default_branch).tap do |c|
       c.resource = resources[:ci]
     end
