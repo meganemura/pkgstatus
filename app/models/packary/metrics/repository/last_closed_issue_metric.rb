@@ -9,6 +9,8 @@ module Packary
     end
 
     def status
+      return :danger unless value
+
       return :success if elapsed_days < 90
       return :warning if elapsed_days < 180
       :danger
