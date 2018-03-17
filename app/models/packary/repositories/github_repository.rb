@@ -66,7 +66,7 @@ module Packary
     end
 
     def access_token
-      ENV['REPOCLINIC_GITHUB_TOKEN']
+      ENV['PACKARY_GITHUB_TOKEN']
     end
   end
 end
