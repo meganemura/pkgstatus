@@ -22,7 +22,7 @@
       <%= form_tag("/projects", method: :post) do %>
       <div class="field">
         <div class="control">
-          <%- placeholder = %w(rails jekyll rubocop ...).join("\n") -%>
+          <%- placeholder = %w(rails jekyll rubocop ...).join(" \n") -%>
           <textarea name="packages" class="textarea is-medium" type="text" placeholder="<%= placeholder %>" rows="10" required></textarea>
         </div>
       </div>

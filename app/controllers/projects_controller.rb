@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    package_names = packages_param.lines
+    package_names = packages_param.lines.flat_map(&:split)
     project = Project.new
     package_names.map(&:strip).uniq.each do |name|
       next if name.blank?
