@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'rest-client'
 gem 'sidekiq'
 gem 'travis'
+gem 'sentry-raven'
 
 # These will be removed
 gem 'octokit'    # RepoClinic::Repositories::GithubRepository
