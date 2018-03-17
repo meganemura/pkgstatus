@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   get '/projects/:id', to: 'projects#show', as: 'project'
+  delete '/projects/:id', to: 'projects#destroy'
   post '/projects', to: 'projects#create'
 
   constraints = {

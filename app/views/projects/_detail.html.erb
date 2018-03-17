@@ -1,0 +1,26 @@
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <nav class="level">
+        <div class="level-left">
+        </div>
+        <div class="level-right">
+          <p class="level-item">
+            <%= link_to '', project_path(project), class: 'delete is-medium', method: :delete, data: { confirm: 'Delete this project?' } %>
+          </p>
+        </div>
+      </nav>
+
+      <h1 class="title">
+        This project is created at <%= project.created_at.to_date.to_s %>.
+      </h1>
+      <h2 class="subtitle">
+      Fetched
+      <%= project.packages.select(&:cached?).count %>
+      /
+      <%= project.packages.count %>
+      packages
+      </h2>
+    </div>
+  </div>
+</section>

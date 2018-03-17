@@ -37,12 +37,14 @@
             <br>
             <%- Package.metric_classes.group_by(&:group).each do |group, metric_classes| -%>
               <div class="content">
-              <h6 class="subtitle is-6">
-              <%= group.to_s.capitalize %>
-              </h5>
-              <div class="field is-grouped is-grouped-multiline">
+              <p class="heading">
+              <%= group %>
+              </p>
+
+              <nav class="level">
+              <div class="level-left">
               <%- metric_classes.each do |metric_class| -%>
-                <div class="control">
+                <div class="level-item">
                   <%- metric = package.metric_collection[metric_class.to_s] %>
                   <%- if metric %>
                     <div class="tags has-addons">
@@ -63,6 +65,8 @@
                 </div>
               <%- end -%>
               </div>
+              </nav>
+
               </div>
             <%- end -%>
           <%- else -%>
