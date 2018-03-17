@@ -10,7 +10,7 @@ class FetchMetricsWorker < ApplicationWorker
 
   def rate_limit_reset=(reset_time)
     reset_in = [reset_time - Time.now.to_i, 300].max
-    Rails.cache.write(cache_key, true, expires_in: reset_in)
+    Rails.cache.write(cache_key, reset_time, expires_in: reset_in)
   end
 
   def rate_limited?
