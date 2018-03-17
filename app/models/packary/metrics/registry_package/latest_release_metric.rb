@@ -1,5 +1,9 @@
 module Packary
   class Metrics::RegistryPackage::LatestReleaseMetric < Packary::Metric
+    def self.group
+      :registry
+    end
+
     def self.title
       'Latest Releases'
     end

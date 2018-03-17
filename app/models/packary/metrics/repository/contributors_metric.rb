@@ -1,5 +1,9 @@
 module Packary
   class Metrics::Repository::ContributorsMetric < Packary::Metric
+    def self.group
+      :repository
+    end
+
     def self.title
       'Contributors'
     end

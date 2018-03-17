@@ -35,7 +35,11 @@
             </small>
             <br>
             <div class="field is-grouped is-grouped-multiline">
-            <%- Package.metric_classes.each do |metric_class| -%>
+            <%- Package.metric_classes.group_by(&:group).each do |group, metric_classes| -%>
+            <h5 class="subtitle is-5">
+            <%= group.to_s.capitalize %>
+            </h5>
+            <%- metric_classes.each do |metric_class| -%>
               <div class="control">
                 <%- metric = package.metric_collection[metric_class.to_s] %>
                 <%- if metric %>
@@ -55,6 +59,7 @@
                   </div>
                 <%- end %>
               </div>
+            <%- end -%>
             <%- end -%>
             </div>
           <%- end -%>

@@ -1,5 +1,9 @@
 module Packary
   class Metrics::RegistryPackage::ReleasesInMetric < Packary::Metric
+    def self.group
+      :registry
+    end
+
     def self.title
       "Releases in #{DAYS} days"
     end

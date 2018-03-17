@@ -1,5 +1,9 @@
 module Packary
   class Metrics::Repository::StarMetric < Packary::Metric
+    def self.group
+      :repository
+    end
+
     def self.title
       'GitHub Stars'
     end

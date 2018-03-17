@@ -1,5 +1,9 @@
 module Packary
   class Metrics::RegistryPackage::DownloadsMetric < Packary::Metric
+    def self.group
+      :registry
+    end
+
     def self.title
       'Downloads'
     end
