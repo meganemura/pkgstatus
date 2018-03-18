@@ -9,6 +9,8 @@ module Packary
     end
 
     def read(source)
+      return nil unless source.gem_versions
+
       Time.parse(source.gem_versions.first['built_at'])
     end
 

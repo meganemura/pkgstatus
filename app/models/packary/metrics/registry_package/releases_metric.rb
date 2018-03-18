@@ -9,7 +9,7 @@ module Packary
     end
 
     def read(source)
-      source.gem_versions.size
+      source.gem_versions&.size
     end
 
     def status

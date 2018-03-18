@@ -13,7 +13,7 @@ module Packary
 
     def read(source)
       versions = source.gem_versions
-      versions.count {|x| Time.parse(x['built_at']) > (Time.current - DURATION) }
+      versions&.count {|x| Time.parse(x['built_at']) > (Time.current - DURATION) }
     end
 
     def status
