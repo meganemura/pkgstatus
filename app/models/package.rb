@@ -28,7 +28,6 @@ class Package < ApplicationRecord
   def cached_resources
     Rails.cache.read(cache_key)
   end
-  alias_method :cached, :cached_resources  # TODO: Deprecated
 
   def cached?
     Rails.cache.exist?(cache_key)
