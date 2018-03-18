@@ -60,7 +60,7 @@ class Package < ApplicationRecord
   def cache_ttl
     return rand(10..60).minutes if Rails.env.development?
 
-    12.hours
+    36.hours
   end
 
   def self.metric_classes
