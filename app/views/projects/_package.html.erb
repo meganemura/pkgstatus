@@ -5,25 +5,37 @@
       <div class="content">
         <p>
           <strong><%= package.name %></strong>
-
-          <small>
-            <a href="<%= package.registry_url %>">
-              <i class="fa fa-diamond" aria-hidden="true"></i>
-              <%= package.registry %>
-            </a>
-          </small>
-
-          <%- if package.cached? %>
+          <div class="content">
+            <p class="heading">sources</p>
 
             <small>
+              <span class="tag">
+              <a href="<%= package.registry_url %>">
+                <i class="fa fa-diamond" aria-hidden="true"></i>
+                <%= package.registry %>
+              </a>
+              </span>
+            </small>
+
+            <%- if package.cached? %>
+            <small>
+              <%- if package.repository_url -%>
+              <span class="tag">
               <a href="<%= package.repository_url %>">
                 <i class="fa fa-github" aria-hidden="true"></i>
                 GitHub
               </a>
+              </span>
+              <%- else -%>
+              <span class="tag">
+              Repository detection error
+              </span>
+              <%- end -%>
             </small>
 
             <small>
               <%- if package.ci_url %>
+                <span class="tag">
                 <a href="<%= package.ci_url %>">
                   <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                   CI
@@ -32,9 +44,13 @@
                     (<%= versions.size %> ruby versions)
                   <%- end %>
                 </a>
+                </span>
               <%- end %>
             </small>
-            <br>
+            <%- end %>
+          </div>
+
+          <%- if package.cached? %>
             <%- Package.metric_classes.group_by(&:group).each do |group, metric_classes| -%>
               <div class="content">
               <p class="heading">
