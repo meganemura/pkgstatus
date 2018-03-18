@@ -13,6 +13,8 @@ module Packary
     end
 
     def status
+      return :warning unless value
+
       return :success if value > 1_000_000
       return :warning if value > 10_000
       :failure

@@ -17,6 +17,8 @@ module Packary
     end
 
     def status
+      return :warning unless value
+
       return :success if value > 0
       :warning
     end
