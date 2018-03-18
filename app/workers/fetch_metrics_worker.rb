@@ -1,6 +1,7 @@
 class FetchMetricsWorker < ApplicationWorker
   def perform(registry, name)
-    raise 'Request rate limit exceeded' if rate_limited?
+    # XXX: Do not raise errors because it cause exceeding of sentry quota...
+    return if rate_limited?
 
     package = Package.find_by(registry: registry, name: name)
     package.cache
