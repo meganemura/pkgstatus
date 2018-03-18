@@ -27,25 +27,31 @@
               </a>
               </span>
               <%- else -%>
-              <span class="tag">
+              <span class="tag is-danger">
               Repository detection error
               </span>
               <%- end -%>
             </small>
 
             <small>
-              <%- if package.ci_url %>
-                <span class="tag">
-                <a href="<%= package.ci_url %>">
-                  <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                  CI
-                  <%- versions = package.send(:ci).configured_versions %>
-                  <%- if versions.present? %>
-                    (<%= versions.size %> ruby versions)
-                  <%- end %>
-                </a>
-                </span>
-              <%- end %>
+              <%- if package.repository_url -%>
+                <%- if package.ci_url %>
+                  <span class="tag">
+                  <a href="<%= package.ci_url %>">
+                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                    CI
+                    <%- versions = package.send(:ci).configured_versions %>
+                    <%- if versions.present? %>
+                      (<%= versions.size %> ruby versions)
+                    <%- end %>
+                  </a>
+                  </span>
+                <%- else %>
+                  <span class="tag is-warning">
+                  CI detection warning
+                  </span>
+                <%- end %>
+              <%- end -%>
             </small>
             <%- end %>
           </div>
