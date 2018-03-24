@@ -16,6 +16,7 @@ gem 'rest-client'
 gem 'sidekiq'
 gem 'travis'
 gem 'sentry-raven'
+gem 'meta-tags'
 
 # These will be removed
 gem 'octokit'    # RepoClinic::Repositories::GithubRepository
