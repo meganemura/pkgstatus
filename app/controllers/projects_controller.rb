@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
+    @packages = @project.packages.order(:registry, :name).page(params[:page]).per(params[:per])
     @project.packages.each(&:cache_later)   # Use &:cache to cache now
   end
 

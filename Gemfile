@@ -17,6 +17,7 @@ gem 'sidekiq'
 gem 'travis'
 gem 'sentry-raven'
 gem 'meta-tags'
+gem 'kaminari'
 
 # These will be removed
 gem 'octokit'    # RepoClinic::Repositories::GithubRepository
