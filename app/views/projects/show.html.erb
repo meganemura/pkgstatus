@@ -5,6 +5,7 @@
 <%- @packages.each do |package| -%>
 <%= render partial: 'package', locals: { package: package } %>
 <%- end -%>
+<%= paginate(@packages) %>
 </div>
 </div>
 </section>
