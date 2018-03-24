@@ -2,9 +2,7 @@
 <section class="section">
 <div class="container">
 <div class="content has-text-centered">
-<%- @packages.each do |package| -%>
-<%= render partial: 'package', locals: { package: package } %>
-<%- end -%>
+<%= render partial: 'package', collection: @packages %>
 <%= paginate(@packages) %>
 </div>
 </div>
