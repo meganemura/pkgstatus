@@ -2,7 +2,7 @@
 <section class="section">
 <div class="container">
 <div class="content has-text-centered">
-<%- @project.packages.each do |package| -%>
+<%- @packages.each do |package| -%>
 <%= render partial: 'package', locals: { package: package } %>
 <%- end -%>
 </div>
