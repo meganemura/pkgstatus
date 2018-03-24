@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+.brand {
+  font-family: 'Lato', sans-serif;
+}
