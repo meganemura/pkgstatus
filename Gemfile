@@ -38,6 +38,7 @@ group :development do
 
   gem 'derailed_benchmarks'
   gem 'stackprof'
+  gem 'pp_sql'
 end
 
 group :test do
