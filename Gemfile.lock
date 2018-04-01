@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    anbt-sql-formatter (0.0.6)
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -176,6 +177,9 @@ GEM
     octokit (4.8.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     pg (1.0.0)
+    pp_sql (0.2.9)
+      anbt-sql-formatter (~> 0.0.5)
+      rails
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -351,6 +355,7 @@ DEPENDENCIES
   meta-tags
   octokit
   pg (>= 0.18, < 2.0)
+  pp_sql
   pry-byebug
   pry-rails
   puma (~> 3.11)
