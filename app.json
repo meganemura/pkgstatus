@@ -1,6 +1,9 @@
 {
   "environments": {
     "test": {
+      "env": {
+        "CODECOV_SLUG": "meganemura/pkgstatus"
+      },
       "addons": [
         "heroku-postgresql",
         "heroku-redis"
