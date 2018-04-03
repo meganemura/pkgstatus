@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/meganemura/codecov-ruby.git
+  revision: aa7cb28a9a9c109f32634d1b30993e87513cccf6
+  branch: heroku-ci
+  specs:
+    codecov (0.1.11)
+      json
+      simplecov
+      url
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -68,10 +78,6 @@ GEM
     chromedriver-helper (1.2.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
-    codecov (0.1.10)
-      json
-      simplecov
-      url
     coderay (1.1.2)
     codestatus (0.1.3)
       gems
@@ -351,7 +357,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   capybara (~> 3.4)
   chromedriver-helper
-  codecov
+  codecov!
   codestatus
   derailed_benchmarks
   dotenv-rails
