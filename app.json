@@ -1,0 +1,13 @@
+{
+  "environments": {
+    "test": {
+      "addons": [
+        "heroku-postgresql",
+        "heroku-redis"
+      ],
+      "buildpacks": [
+        { "url": "heroku/ruby" }
+      ]
+    }
+  }
+}
