@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+  - 2.4.3
+services:
+  - postgresql
+  - redis
+addons:
+  postgresql: "9.6"
+cache: bundler
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - bundle exec rails db:setup
+  - bundle exec rails db:test:prepare
+after_script:
+  - ./cc-test-reporter after-build
