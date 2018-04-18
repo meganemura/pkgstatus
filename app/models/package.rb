@@ -42,7 +42,7 @@ class Package < ApplicationRecord
     return cached_resources if cached?
 
     # FIXME: Implement #cache to registry_package, repository
-    metrics
+    fetch_metrics
 
     ci&.load_resource
 
@@ -75,12 +75,12 @@ class Package < ApplicationRecord
   end
 
   def metric_collection
-    metrics.each_with_object({}) do |metric, hash|
+    fetch_metrics.each_with_object({}) do |metric, hash|
       hash[metric.class.to_s] = metric
     end
   end
 
-  def metrics
+  def fetch_metrics
     registry_metrics + repository_metrics
   end
 
