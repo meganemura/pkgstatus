@@ -40,7 +40,7 @@
                   <a href="<%= package.ci_url %>">
                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                     CI
-                    <%- versions = package.send(:ci).configured_versions %>
+                    <%- versions = nil#package.send(:ci).configured_versions %>
                     <%- if versions.present? %>
                       (<%= versions.size %> ruby versions)
                     <%- end %>
