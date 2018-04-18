@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_18_123357) do
+ActiveRecord::Schema.define(version: 2018_04_18_143357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 2018_04_18_123357) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["package_id"], name: "index_metrics_on_package_id"
+  end
+
+  create_table "package_sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "package_id"
+    t.string "repository_url"
+    t.string "registry_url"
+    t.string "ci_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_package_sources_on_package_id"
   end
 
   create_table "packages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -46,6 +56,7 @@ ActiveRecord::Schema.define(version: 2018_04_18_123357) do
   end
 
   add_foreign_key "metrics", "packages"
+  add_foreign_key "package_sources", "packages"
   add_foreign_key "project_packages", "packages"
   add_foreign_key "project_packages", "projects"
 end
