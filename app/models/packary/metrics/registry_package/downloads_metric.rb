@@ -12,6 +12,11 @@ module Packary
       source.downloads
     end
 
+    # Use ActiveModel::Attribute?
+    def value
+      original_value.to_i
+    end
+
     def status
       return :warning unless value
 

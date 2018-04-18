@@ -12,6 +12,11 @@ module Packary
       source.last_commit&.dig(:commit, :committer, :date)
     end
 
+    # Use ActiveModel::Attribute?
+    def value
+      Time.parse(original_value)
+    end
+
     def status
       return :success if elapsed_days < 30
       return :warning if elapsed_days < 90

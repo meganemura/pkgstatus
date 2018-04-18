@@ -12,6 +12,11 @@ module Packary
       source.last_closed_issue&.dig(:closed_at)
     end
 
+    # Use ActiveModel::Attribute?
+    def value
+      Time.parse(original_value)
+    end
+
     def status
       return :danger unless value
 
