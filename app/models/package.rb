@@ -1,6 +1,7 @@
 class Package < ApplicationRecord
   has_many :project_packages
   has_many :projects, through: :project_packages
+  has_many :metrics
 
   # https://github.com/rubygems/rubygems.org/blob/master/lib/patterns.rb
   RUBYGEMS_SPECIAL_CHARACTERS = ".-_".freeze
@@ -74,9 +75,15 @@ class Package < ApplicationRecord
     Packary::Repositories::GithubRepository.metric_classes
   end
 
-  def metric_collection
+  def metric_collection_old
     fetch_metrics.each_with_object({}) do |metric, hash|
       hash[metric.class.to_s] = metric
+    end
+  end
+
+  def metric_collection
+    metrics.each_with_object({}) do |metric, hash|
+      hash[metric.type] = metric
     end
   end
 

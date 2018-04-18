@@ -2,6 +2,10 @@ module Packary
   class Metric
     attr_reader :value
 
+    def initialize(value: nil)
+      @value = value if value
+    end
+
     def preload(source)
       @value = read(source)
       self
