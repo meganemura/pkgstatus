@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_18_143357) do
+ActiveRecord::Schema.define(version: 2018_04_18_154130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2018_04_18_143357) do
     t.uuid "package_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "metric_type"
+    t.string "value"
     t.index ["package_id"], name: "index_metrics_on_package_id"
   end
 
