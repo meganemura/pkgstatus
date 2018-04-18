@@ -30,7 +30,7 @@ class Package < ApplicationRecord
   end
 
   def cached?
-    Rails.cache.exist?(cache_key)
+    metrics.present?
   end
 
   def cache_later
