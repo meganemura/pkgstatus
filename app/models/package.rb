@@ -2,6 +2,7 @@ class Package < ApplicationRecord
   has_many :project_packages
   has_many :projects, through: :project_packages
   has_many :metrics
+  has_one :package_source
 
   # https://github.com/rubygems/rubygems.org/blob/master/lib/patterns.rb
   RUBYGEMS_SPECIAL_CHARACTERS = ".-_".freeze
@@ -104,15 +105,15 @@ class Package < ApplicationRecord
   end
 
   def repository_url
-    repository&.html_url
+    package_source&.repository_url
   end
 
   def registry_url
-    registry_package.html_url
+    package_source&.registry_url
   end
 
   def ci_url
-    ci&.html_url
+    package_source&.ci_url
   end
 
   private
