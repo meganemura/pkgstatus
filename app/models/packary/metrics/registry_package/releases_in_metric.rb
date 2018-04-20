@@ -16,6 +16,11 @@ module Packary
       versions&.count {|x| Time.parse(x['built_at']) > (Time.current - DURATION) }
     end
 
+    # Use ActiveModel::Attribute?
+    def value
+      original_value.to_i
+    end
+
     def status
       return :warning unless value
 

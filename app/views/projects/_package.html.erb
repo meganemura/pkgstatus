@@ -40,7 +40,7 @@
                   <a href="<%= package.ci_url %>">
                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                     CI
-                    <%- versions = package.send(:ci).configured_versions %>
+                    <%- versions = nil#package.send(:ci).configured_versions %>
                     <%- if versions.present? %>
                       (<%= versions.size %> ruby versions)
                     <%- end %>
@@ -70,7 +70,7 @@
                   <%- metric = package.metric_collection[metric_class.to_s] %>
                   <%- if metric %>
                     <div class="tags has-addons">
-                      <span class="tag"><%= metric.class.title %></span>
+                      <span class="tag"><%= metric.title %></span>
                       <span class="tag is-<%= metric.class_name %>">
                         <%-
                           value = case metric.value

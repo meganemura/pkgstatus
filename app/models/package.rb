@@ -1,6 +1,8 @@
 class Package < ApplicationRecord
   has_many :project_packages
   has_many :projects, through: :project_packages
+  has_many :metrics
+  has_one :package_source
 
   # https://github.com/rubygems/rubygems.org/blob/master/lib/patterns.rb
   RUBYGEMS_SPECIAL_CHARACTERS = ".-_".freeze
@@ -22,44 +24,36 @@ class Package < ApplicationRecord
 
   attr_writer :resources
   def resources
-    @resources ||= cached_resources || {}
-  end
-
-  def cached_resources
-    Rails.cache.read(cache_key)
+    @resources ||= {}
   end
 
   def cached?
-    Rails.cache.exist?(cache_key)
+    # TODO: Add expiration condition
+    metrics.present?
   end
 
   def cache_later
-    return if cached?
+    store_metrics_later
+  end
+
+  def store_metrics_later
     FetchMetricsWorker.perform_async(registry, name)
   end
 
   def cache
-    return cached_resources if cached?
-
-    # FIXME: Implement #cache to registry_package, repository
-    metrics
-
-    ci&.load_resource
-
-    data = {
-      repository_url: repository_url,
-      registry: registry_package.resource,
-      repository: repository&.resource,
-      ci: ci&.resource,
-    }
-
-    Rails.cache.write(cache_key, data, expires_in: cache_ttl)
+    store_metrics
   end
 
-  def cache_ttl
-    return rand(10..60).minutes if Rails.env.development?
+  def store_metrics
+    # FIXME: Implement #cache to registry_package, repository
+    fetch_metrics.each do |metric|
+      mtr = metrics.find_or_initialize_by(package_id: id, metric_type: metric.class.name)
+      mtr.value = metric.value.to_s
+    end
+    save!
 
-    36.hours
+    pkg_source = PackageSource.find_or_initialize_by(package_id: id)
+    pkg_source.update!(repository_url: fetch_repository_url, registry_url: fetch_registry_url, ci_url: fetch_ci_url)
   end
 
   def self.metric_classes
@@ -76,36 +70,32 @@ class Package < ApplicationRecord
 
   def metric_collection
     metrics.each_with_object({}) do |metric, hash|
-      hash[metric.class.to_s] = metric
+      hash[metric.metric_type] = metric
     end
   end
 
-  def metrics
+  def fetch_metrics
     registry_metrics + repository_metrics
   end
 
   def registry_metrics
-    Rails.cache.fetch(cache_key(__method__), expires_in: cache_ttl) do
-      registry_package.metrics
-    end
+    registry_package.metrics
   end
 
   def repository_metrics
-    Rails.cache.fetch(cache_key(__method__), expires_in: cache_ttl) do
-      repository&.metrics || []
-    end
+    repository&.metrics || []
   end
 
   def repository_url
-    repository&.html_url
+    package_source&.repository_url
   end
 
   def registry_url
-    registry_package.html_url
+    package_source&.registry_url
   end
 
   def ci_url
-    ci&.html_url
+    package_source&.ci_url
   end
 
   private
@@ -147,7 +137,15 @@ class Package < ApplicationRecord
     end
   end
 
-  def cache_key(key = nil)
-    [self.class.name, registry, name, key].compact.join(':')
+  def fetch_repository_url
+    repository&.html_url
+  end
+
+  def fetch_registry_url
+    registry_package.html_url
+  end
+
+  def fetch_ci_url
+    ci&.html_url
   end
 end

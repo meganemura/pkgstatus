@@ -13,8 +13,8 @@ module Packary
     end
 
     def value
-      return '> 99' if original_value > 99
-      original_value
+      return '> 99' if original_value.to_i > 99
+      original_value.to_i
     end
 
     def status

@@ -14,6 +14,11 @@ module Packary
       Time.parse(source.gem_versions.first['built_at'])
     end
 
+    # Use ActiveModel::Attribute?
+    def value
+      Time.parse(original_value)
+    end
+
     def status
       return :warning unless value
 
