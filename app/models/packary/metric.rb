@@ -7,7 +7,7 @@ module Packary
     end
 
     def preload(source)
-      @value = read(source)
+      @value = read(source).to_s
       self
     end
 
