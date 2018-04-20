@@ -16,7 +16,7 @@ module Packary
 
     # Use ActiveModel::Attribute?
     def value
-      Time.parse(original_value)
+      Time.parse(original_value) if original_value.present?
     end
 
     def status
