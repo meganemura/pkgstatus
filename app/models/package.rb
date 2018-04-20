@@ -53,7 +53,7 @@ class Package < ApplicationRecord
     save!
 
     pkg_source = PackageSource.find_or_initialize_by(package_id: id)
-    pkg_source.update!(repository_url: '', registry_url: '', ci_url: '')
+    pkg_source.update!(repository_url: fetch_repository_url, registry_url: fetch_registry_url, ci_url: fetch_ci_url)
   end
 
   def self.metric_classes
@@ -135,5 +135,17 @@ class Package < ApplicationRecord
     @ci ||= Packary::Cis::TravisCi.new(repository.slug, repository.default_branch).tap do |c|
       c.resource = resources[:ci]
     end
+  end
+
+  def fetch_repository_url
+    repository&.html_url
+  end
+
+  def fetch_registry_url
+    registry_package.html_url
+  end
+
+  def fetch_ci_url
+    ci&.html_url
   end
 end
