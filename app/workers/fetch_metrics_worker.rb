@@ -4,7 +4,7 @@ class FetchMetricsWorker < ApplicationWorker
     return if rate_limited?
 
     package = Package.find_by(registry: registry, name: name)
-    package.cache
+    MetricsFetcher.new(package.id).fetch
   rescue Octokit::TooManyRequests => e
     self.rate_limit_reset = e.response_headers['x-ratelimit-reset'].to_i
   end
