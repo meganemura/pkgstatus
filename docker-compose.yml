@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.3'
 services:
   db:
     image: postgres:latest
@@ -6,12 +6,22 @@ services:
       - "5432:5432"
     volumes:
       - db:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U postgres
+      start_period: 10s
+      interval: 10s
+      timeout: 30s
+      retries: 3
   redis:
     image: redis:alpine
     ports:
       - "6379:6379"
     volumes:
       - redis:/data
+  healthcheck:
+    image: busybox
+    depends_on:
+      db: { condition: service_healthy }
 volumes:
   db:
   redis:
