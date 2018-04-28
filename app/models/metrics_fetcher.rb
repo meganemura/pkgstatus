@@ -4,9 +4,7 @@ class MetricsFetcher
   end
 
   def fetch
-    if package_source
-      return unless package_source.expired?
-    end
+    return unless package_source_expired?
 
     store_metrics
     update_package_source
@@ -19,6 +17,11 @@ class MetricsFetcher
   attr_writer :resources
   def resources
     @resources ||= {}
+  end
+
+  def package_source_expired?
+    return false unless package_source
+    package_source.expired?
   end
 
   def store_metrics
