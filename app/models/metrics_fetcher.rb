@@ -29,7 +29,7 @@ class MetricsFetcher
     package_source.update!(repository_url: fetch_repository_url,
                            registry_url: fetch_registry_url,
                            ci_url: fetch_ci_url,
-                           updated_at: Time.current)
+                           expired_at: Time.current + PackageSource.ttl)
   end
 
   def package_source

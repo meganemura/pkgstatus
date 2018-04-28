@@ -6,4 +6,8 @@ class PackageSource < ApplicationRecord
 
     expired_at < Time.current
   end
+
+  def self.ttl
+    7.days
+  end
 end
