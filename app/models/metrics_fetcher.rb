@@ -11,6 +11,7 @@ class MetricsFetcher
     end
 
     store_metrics
+    update_package_source
   end
 
   attr_writer :resources
@@ -25,7 +26,9 @@ class MetricsFetcher
       mtr.value = metric.value.to_s
       mtr.save!
     end
+  end
 
+  def update_package_source
     package_source.update!(repository_url: fetch_repository_url,
                            registry_url: fetch_registry_url,
                            ci_url: fetch_ci_url,
