@@ -6,6 +6,10 @@ class MetricsFetcher
   attr_reader :package
 
   def fetch
+    if package_source
+      return unless package_source.expired?
+    end
+
     store_metrics
   end
 
@@ -22,8 +26,14 @@ class MetricsFetcher
       mtr.save!
     end
 
-    pkg_source = PackageSource.find_or_initialize_by(package_id: id)
-    pkg_source.update!(repository_url: fetch_repository_url, registry_url: fetch_registry_url, ci_url: fetch_ci_url)
+    package_source.update!(repository_url: fetch_repository_url,
+                           registry_url: fetch_registry_url,
+                           ci_url: fetch_ci_url,
+                           updated_at: Time.current)
+  end
+
+  def package_source
+    @package_source ||= PackageSource.find_or_initialize_by(package_id: id)
   end
 
   def fetch_metrics
