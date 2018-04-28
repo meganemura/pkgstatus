@@ -2,6 +2,12 @@ class PackageSource < ApplicationRecord
   belongs_to :package
 
   def expired?
-    updated_at <= 7.days.ago
+    return true unless expired_at
+
+    expired_at < Time.current
+  end
+
+  def self.ttl
+    7.days
   end
 end

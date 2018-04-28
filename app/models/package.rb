@@ -28,7 +28,7 @@ class Package < ApplicationRecord
   end
 
   def cache_later
-    store_metrics_later if package_source.expired?
+    store_metrics_later if !package_source || package_source.expired?
   end
 
   def store_metrics_later
