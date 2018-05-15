@@ -27,3 +27,5 @@
 
 # application specific
 .env.development
+
+erd.pdf
