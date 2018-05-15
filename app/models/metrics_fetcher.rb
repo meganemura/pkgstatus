@@ -3,19 +3,25 @@ class MetricsFetcher
     @package = Package.find(package_id)
   end
 
-  attr_reader :package
-
   def fetch
-    if package_source
-      return unless package_source.expired?
-    end
+    return unless package_source_expired?
 
     store_metrics
+    update_package_source
   end
+
+  private
+
+  attr_reader :package
 
   attr_writer :resources
   def resources
     @resources ||= {}
+  end
+
+  def package_source_expired?
+    return false unless package_source
+    package_source.expired?
   end
 
   def store_metrics
@@ -25,7 +31,9 @@ class MetricsFetcher
       mtr.value = metric.value.to_s
       mtr.save!
     end
+  end
 
+  def update_package_source
     package_source.update!(repository_url: fetch_repository_url,
                            registry_url: fetch_registry_url,
                            ci_url: fetch_ci_url,
@@ -47,8 +55,6 @@ class MetricsFetcher
   def repository_metrics
     repository&.metrics || []
   end
-
-  private
 
   def registry_package
     return @registry_package if @registry_package
