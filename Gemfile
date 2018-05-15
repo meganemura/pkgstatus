@@ -41,6 +41,7 @@ group :development do
   gem 'derailed_benchmarks'
   gem 'stackprof'
   gem 'pp_sql'
+  gem 'rails-erd'
 end
 
 group :test do
