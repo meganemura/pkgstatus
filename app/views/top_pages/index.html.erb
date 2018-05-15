@@ -14,7 +14,7 @@
 </section>
 <section class="section">
 <div class="container has-text-centered">
-  <%= form_tag("/projects", method: :post) do %>
+  <%= form_tag("/projects", method: :post, onsubmit: 'return validatePackages()') do %>
   <div class="columns">
     <div class="column is-half">
       <h2 class="subtitle">
@@ -25,7 +25,7 @@
       <div class="field">
         <div class="control">
           <%- placeholder = %w(rails jekyll rubocop ...).join(" \n") -%>
-          <textarea name="packages[rubygems]" class="textarea is-medium" type="text" placeholder="<%= placeholder %>" rows="10"></textarea>
+          <textarea name="packages[rubygems]" class="textarea is-medium js-package-form" type="text" placeholder="<%= placeholder %>" rows="10"></textarea>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
       <div class="field">
         <div class="control">
           <%- placeholder = %w(express react lodash ...).join(" \n") -%>
-          <textarea name="packages[npm]" class="textarea is-medium" type="text" placeholder="<%= placeholder %>" rows="10"></textarea>
+          <textarea name="packages[npm]" class="textarea is-medium js-package-form" type="text" placeholder="<%= placeholder %>" rows="10"></textarea>
         </div>
       </div>
     </div>
