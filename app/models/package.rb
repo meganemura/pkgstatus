@@ -9,9 +9,19 @@ class Package < ApplicationRecord
   RUBYGEMS_ALLOWED_CHARACTERS = "[A-Za-z0-9#{Regexp.escape(RUBYGEMS_SPECIAL_CHARACTERS)}]+".freeze
   RUBYGEMS_NAME_PATTERN       = /\A#{RUBYGEMS_ALLOWED_CHARACTERS}\Z/
 
+  NPM_DISALLOWED_CHARACTERS = /~()'!*/
+
   validates :registry, presence: true
   validates :name, presence: true
-  validate :rubygem_naming, if: :rubygem?
+  validate :package_naming
+
+  def package_naming
+    if rubygem?
+      rubygem_naming
+    elsif npm?
+      npm_naming
+    end
+  end
 
   def rubygem_naming
     return if name.match?(RUBYGEMS_NAME_PATTERN)
@@ -20,6 +30,22 @@ class Package < ApplicationRecord
 
   def rubygem?
     registry == 'rubygems'
+  end
+
+  # https://github.com/npm/validate-npm-package-name#naming-rules
+  def npm_naming
+    if name.length == 0 ||
+       name.length > 214 ||
+       name.strip != name ||
+       name.match(/^\./) ||
+       name.match(/^_/) ||
+       name.match(NPM_DISALLOWED_CHARACTERS)
+      errors.add(:name, 'Given name is not allowed.')
+    end
+  end
+
+  def npm?
+    registry == 'npm'
   end
 
   def cached?

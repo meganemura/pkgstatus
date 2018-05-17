@@ -6,12 +6,10 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    package_names = packages_param.lines.flat_map(&:split)
     project = Project.new
-    package_names.map(&:strip).uniq.each do |name|
-      next if name.blank?
-      project.packages << Package.find_or_initialize_by(registry: 'rubygems', name: name)
-    end
+    project.packages =
+      packages_for(registry: 'rubygems', names: rubygems_package_names) +
+      packages_for(registry: 'npm',      names: npm_package_names)
 
     if project.save
       redirect_to project_path(project)
@@ -32,6 +30,24 @@ class ProjectsController < ApplicationController
   private
 
   def packages_param
-    params.require(:packages)
+    params.require(:packages).permit(:rubygems, :npm)
+  end
+
+  def packages_for(registry:, names:)
+    names.map do |name|
+      Package.find_or_initialize_by(registry: registry, name: name)
+    end
+  end
+
+  def rubygems_package_names
+    package_names_for(:rubygems)
+  end
+
+  def npm_package_names
+    package_names_for(:npm)
+  end
+
+  def package_names_for(registry)
+    packages_param[registry].lines.flat_map(&:split).uniq
   end
 end

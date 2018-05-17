@@ -11,7 +11,7 @@
             <small>
               <span class="tag">
               <a href="<%= package.registry_url %>">
-                <i class="fa fa-diamond" aria-hidden="true"></i>
+                <i class="<%= icon(package) %>" aria-hidden="true"></i>
                 <%= package.registry %>
               </a>
               </span>
@@ -22,7 +22,7 @@
               <%- if package.repository_url -%>
               <span class="tag">
               <a href="<%= package.repository_url %>">
-                <i class="fa fa-github" aria-hidden="true"></i>
+                <i class="fab fa-github" aria-hidden="true"></i>
                 GitHub
               </a>
               </span>
@@ -38,7 +38,7 @@
                 <%- if package.ci_url %>
                   <span class="tag">
                   <a href="<%= package.ci_url %>">
-                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                    <i class="far fa-check-circle" aria-hidden="true"></i>
                     CI
                     <%- versions = nil#package.send(:ci).configured_versions %>
                     <%- if versions.present? %>
