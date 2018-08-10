@@ -175,7 +175,7 @@ GEM
     nio4r (2.3.0)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
-    octokit (4.9.0)
+    octokit (4.10.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     pg (1.0.0)
     pp_sql (0.2.9)
