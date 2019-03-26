@@ -1,0 +1,17 @@
+{
+  "environments": {
+    "test": {
+      "stack": "cedar-14",
+      "env": {
+        "CODECOV_SLUG": "meganemura/pkgstatus"
+      },
+      "addons": [
+        "heroku-postgresql",
+        "heroku-redis"
+      ],
+      "buildpacks": [
+        { "url": "heroku/ruby" }
+      ]
+    }
+  }
+}
