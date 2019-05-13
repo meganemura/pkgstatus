@@ -126,9 +126,8 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
-    jbuilder (2.7.0)
+    jbuilder (2.9.0)
       activesupport (>= 4.2.0)
-      multi_json (>= 1.2)
     json (2.2.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -358,7 +357,7 @@ DEPENDENCIES
   derailed_benchmarks
   dotenv-rails
   gems
-  jbuilder (~> 2.5)
+  jbuilder (~> 2.9)
   kaminari
   listen (>= 3.0.5, < 3.2)
   meta-tags
