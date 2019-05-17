@@ -55,13 +55,14 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
-    capybara (3.18.0)
+    capybara (3.20.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
+      uglifier
       xpath (~> 3.2)
     childprocess (1.0.1)
       rake (< 13.0)
@@ -250,7 +251,7 @@ GEM
       redis-store (>= 1.2, < 2)
     redis-store (1.4.1)
       redis (>= 2.2, < 5)
-    regexp_parser (1.4.0)
+    regexp_parser (1.5.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -351,7 +352,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
-  capybara (~> 3.18)
+  capybara (~> 3.20)
   chromedriver-helper
   codecov
   codestatus
