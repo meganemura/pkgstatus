@@ -179,9 +179,9 @@ GEM
     octokit (4.9.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     pg (1.0.0)
-    pp_sql (0.2.10)
+    pp_sql (1.0.0)
+      activerecord
       anbt-sql-formatter (~> 0.0.6)
-      rails
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -340,9 +340,9 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 5.0)
     websocket (1.2.5)
-    websocket-driver (0.7.0)
+    websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.3)
+    websocket-extensions (0.1.4)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
