@@ -5,7 +5,7 @@ if v = ENV['CUSTOM_RUBY_VERSION']
   ruby v
 end
 
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 5.2.4'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jbuilder', '~> 2.5'
