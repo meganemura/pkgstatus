@@ -178,7 +178,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     octokit (4.9.0)
       sawyer (~> 0.8.0, >= 0.5.3)
-    pg (1.0.0)
+    pg (1.2.2)
     pp_sql (0.2.10)
       anbt-sql-formatter (~> 0.0.6)
       rails
